@@ -1,0 +1,76 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Form</title>
+    <style>
+        ul > li {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    @*<h1>FormCollection Output</h1>
+        @ViewBag.name
+        @ViewBag.userid
+        @ViewBag.profession
+        @ViewBag.gender
+        @ViewBag.hobbies*@
+    @if (Model != null && @Model.userid !=0)
+        {
+            <h1>Modal Binding Output</h1>
+            <ul>
+                <li>Name:@Model.name</li>
+                <li>Id:@Model.userid</li>
+                <li>Gender:@Model.gender</li>
+                <li>Profession: @Model.profession</li>
+                Hobbies:
+                @if (Model.hobbies != null)
+                {
+                    foreach (var hobby in Model.hobbies)
+                    {
+                        <li>@hobby</li>
+
+                    }
+                }
+            </ul>
+        }
+    <hr />
+    <form action="" method="post">
+        <label>Name:</label>
+        <input type="text" name="name"><br /><br>
+
+
+        <label>ID:</label>
+        <input type="text" name="userid"><br /><br>
+
+        <label>Gender:</label>
+        <input type="radio" name="gender" value="Male">
+        <label>Male</label>
+        <input type="radio" name="gender" value="Female">
+        <label>Female</label><br><br>
+
+        <label> Profession:</label>
+        <select id="profession" name="profession">
+            <option value="" selected disabled>Select</option>
+            <option value="teacher">Teacher</option>
+            <option value="student">Student</option>
+        </select><br /><br />
+
+        <label>Hobbies</label>
+        <input type="checkbox" name="hobbies[]" value="A">A
+        <input type="checkbox" name="hobbies[]" value="B">B
+        <input type="checkbox" name="hobbies[]" value="C">C
+        <input type="checkbox" name="hobbies[]" value="D">D
+        <br /><br>
+
+        <input type="submit" />
+    </form>
+</body>
+</html>
