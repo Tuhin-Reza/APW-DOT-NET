@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_StudentLayoutPage.cshtml";
+}
+
+@{
+    bool CheckGender(string gender)
+    {
+        if (Model != null && Model.gender != null &&
+            Model.gender.Equals(gender))
+        {
+            return true;
+        }
+        return false;
+    }
+    bool SelectedCountry(string country)
+    {
+        if (Model != null && Model.country != null && Model.country.Equals(country))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    bool CheckHobbies(string hobby)
+    {
+        if (Model != null && Model.hobbies != null)
+        {
+            foreach (var h in Model.hobbies)
+            {
+                if (h.Equals(hobby)) return true;
+            }
+        }
+        return false;
+    }
+}
+<h2>Registration</h2>
+<!--Html.ValidationSummary()-->
+
+<form action="" method="post">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td>
+                <input type="text" name="name" id="name" value="@(Model==null ? "":Model.name)" />
+                <br /><span class="text-danger">@Html.ValidationMessage("name")</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Gender: </td>
+            <td>
+                <input type="radio" name="gender" id="male" value="Male" checked="@CheckGender("Male")" />Male
+                <input type="radio" name="gender" id="Female" value="Female" checked="@CheckGender("Female")" />Female
+                <br /><span class="text-danger">@Html.ValidationMessage("gender")</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Country:</td>
+            <td>
+                <select name="country" id="country">
+                    <option selected disabled>Select Country</option>
+                    <option value="usa" @(SelectedCountry("usa") ? "selected" : "")>United States</option>
+                    <option value="canada" @(SelectedCountry("canada") ? "selected" : "")>Canada</option>
+                    <option value="uk" @(SelectedCountry("uk") ? "selected" : "")>United Kingdom</option>
+                </select>
+                <br /><span class="text-danger">@Html.ValidationMessage("country")</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Hobbies:</td>
+            <td>
+                <input type="checkbox" name="hobbies[]" id="hobbies[]" value="Cricket" checked="@CheckHobbies("Cricket")" />Cricket
+                <input type="checkbox" name="hobbies[]" id="hobbies[]" value="Football" checked="@CheckHobbies("Football")" />Football
+                <input type="checkbox" name="hobbies[]" id="hobbies[]" value="Painting" checked="@CheckHobbies("Painting")" />Painting
+                <input type="checkbox" name="hobbies[]" id="hobbies[]" value="Cooking" checked="@CheckHobbies("Cookin")" />Cooking
+                <input type="checkbox" name="hobbies[]" id="hobbies[]" value="Hiking" checked="@CheckHobbies("Hiking")" />Hiking
+                <br /><span class="text-danger">@Html.ValidationMessage("hobbies")</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Contact Number:</td>
+            <td>
+                <input type="tel" name="phone" id="phone" value="@(Model==null ? "":Model.phone)" />
+                <br /><span class="text-danger">@Html.ValidationMessage("phone")</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Username:</td>
+            <td>
+                <input type="text" name="username" id="username" value="@(Model==null ? "":Model.username)" />
+                <br /><span class="text-danger">@Html.ValidationMessage("username")</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>
+                <input type="email" name="email" id="email" value="@(Model==null ? "":Model.email)" />
+                <br /><span class="text-danger">@Html.ValidationMessage("email")</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td>
+                <input type="password" name="password" id="password" value=""/>
+                <br /><span class="text-danger">@Html.ValidationMessage("password")</span>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="reset" value="Reset" />
+                <input type="submit" value="Sign Up" />
+            </td>
+        </tr>
+    </table>
+</form>

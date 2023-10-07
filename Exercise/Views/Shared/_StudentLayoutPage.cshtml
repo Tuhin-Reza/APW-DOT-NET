@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        body{
+            margin-top: 50px;
+            margin-left:100px;
+        }
+        .nav{
+        }
+        .nav>a{
+            margin-right:20px;
+            
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="" class="btn btn-primary">Home</a>
+        <a href="" class="btn btn-secondary">About</a>
+        <a href="https://localhost:44397/Student/Registration" class="btn btn-warning">SignUp</a>
+        <a href="https://localhost:44397/Student/Login" class="btn btn-danger">login</a>
+        <a href="" class=""></a>
+    </nav>
+    <div class="Header">
+
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+    <div class="footer">
+        <hr />
+        <p>
+            Copyright .Net[B]
+        </p>
+
+    </div>
+</body>
+</html>
