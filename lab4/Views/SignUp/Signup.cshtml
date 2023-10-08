@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Signup";
+}
+<style>
+    .box{
+        display:flex;
+        gap:50px;
+    }
+</style>
+<h2>Signup</h2>
+
+<form action="" method="post">
+    <div class="box">
+        <div>
+            <div class="form-group">
+                <label>Name:</label>
+                <input type="text" name="name" value="@(Model==null ? "":Model.name)" class="form-control" placeholder="Enter name">
+                <small class="text-danger">@Html.ValidationMessage("name")</small>
+            </div><br />
+
+            <div class="form-group">
+                <label>User Id:</label>
+                <input type="text" name="user_id" value="@(Model==null ? "":Model.user_id)" class="form-control" placeholder="Enter user id">
+                <small class="text-danger">@Html.ValidationMessage("user_id")</small>
+            </div><br />
+
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" name="password" value="@(Model==null ? "":Model.password)" class="form-control" placeholder="Enter password">
+                <small class="text-danger">@Html.ValidationMessage("password")</small>
+            </div><br />
+        </div>
+        <div>
+            <div class="form-group">
+                <label>ID:</label>
+                <input type="text" name="id" value="@(Model==null ? "":Model.id)" class="form-control" placeholder="Enter id">
+                <small class="text-danger">@Html.ValidationMessage("id")</small>
+            </div><br />
+
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="text" name="email" value="@(Model==null ? "":Model.email)" class="form-control" placeholder="Enter email">
+                <small class="text-danger">@Html.ValidationMessage("email")</small>
+            </div><br/>
+
+            <div class="form-group">
+                <label>DOB:</label>
+                <input type="date" name="dob" value="@(Model == null ? "" : Model.dob.ToString("yyyy-MM-dd"))" class="form-control">
+                <small class="text-danger">@Html.ValidationMessage("dob")</small>
+            </div><br />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
