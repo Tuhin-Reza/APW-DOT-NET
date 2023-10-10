@@ -1,0 +1,24 @@
+﻿@model Exercise.Models.Signup
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Signup</title>
+</head>
+<body>
+    <div>
+        <form action="" method="post">
+            <input type="text" name="fname" value="@(Model==null ? "":Model.fname)" />
+            <small>@Html.ValidationMessage("fname")</small><br /><br />
+            <input type="text" name="lname" value="@(Model==null ? "":Model.lname)" />
+            <small>@Html.ValidationMessage("lname")</small><br /><br />
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+</body>
+</html>

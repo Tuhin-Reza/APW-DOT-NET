@@ -1,8 +1,4 @@
 ﻿using Exercise.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Exercise.Controllers
@@ -33,9 +29,25 @@ namespace Exercise.Controllers
 
         }
         public ActionResult Login()
-        {   
+        {
             return View();
         }
 
+        //Custom Validation Section
+        [HttpGet]
+        public ActionResult Signup()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Signup(Signup info)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("");
+            }
+            return View(info);
+        }
     }
 }
