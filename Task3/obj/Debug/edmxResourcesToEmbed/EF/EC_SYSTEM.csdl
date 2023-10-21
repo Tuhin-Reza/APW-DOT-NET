@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="addchart">
+    <Key>
+      <PropertyRef Name="chart_id" />
+    </Key>
+    <Property Name="chart_id" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="prod_id" Type="Int32" />
+    <Property Name="prod_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="prod_price" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="user" Relationship="Self.FK__addcharts__user___534D60F1" FromRole="addcharts" ToRole="users" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="Int32" Nullable="false" />
+    <Property Name="category_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="products" Relationship="Self.FK__products__catego__4E88ABD4" FromRole="categorys" ToRole="products" />
+  </EntityType>
+  <EntityType Name="cours">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="c_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="order">
+    <Key>
+      <PropertyRef Name="order_id" />
+    </Key>
+    <Property Name="order_id" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="Int32" />
+    <NavigationProperty Name="user" Relationship="Self.FK__orders__user_id__5629CD9C" FromRole="orders" ToRole="users" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="product_id" Type="Int32" Nullable="false" />
+    <Property Name="product_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="category_id" Type="Int32" />
+    <Property Name="price" Type="Int32" />
+    <NavigationProperty Name="category" Relationship="Self.FK__products__catego__4E88ABD4" FromRole="products" ToRole="categorys" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="addcharts" Relationship="Self.FK__addcharts__user___534D60F1" FromRole="users" ToRole="addcharts" />
+    <NavigationProperty Name="orders" Relationship="Self.FK__orders__user_id__5629CD9C" FromRole="users" ToRole="orders" />
+  </EntityType>
+  <Association Name="FK__addcharts__user___534D60F1">
+    <End Role="users" Type="Self.user" Multiplicity="0..1" />
+    <End Role="addcharts" Type="Self.addchart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="addcharts">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__products__catego__4E88ABD4">
+    <End Role="categorys" Type="Self.category" Multiplicity="0..1" />
+    <End Role="products" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categorys">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__orders__user_id__5629CD9C">
+    <End Role="users" Type="Self.user" Multiplicity="0..1" />
+    <End Role="orders" Type="Self.order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="orders">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="addcharts" EntityType="Self.addchart" />
+    <EntitySet Name="categorys" EntityType="Self.category" />
+    <EntitySet Name="courses" EntityType="Self.cours" />
+    <EntitySet Name="orders" EntityType="Self.order" />
+    <EntitySet Name="products" EntityType="Self.product" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <AssociationSet Name="FK__addcharts__user___534D60F1" Association="Self.FK__addcharts__user___534D60F1">
+      <End Role="users" EntitySet="users" />
+      <End Role="addcharts" EntitySet="addcharts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__products__catego__4E88ABD4" Association="Self.FK__products__catego__4E88ABD4">
+      <End Role="categorys" EntitySet="categorys" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__orders__user_id__5629CD9C" Association="Self.FK__orders__user_id__5629CD9C">
+      <End Role="users" EntitySet="users" />
+      <End Role="orders" EntitySet="orders" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

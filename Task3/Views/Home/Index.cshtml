@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<a class="btn btn-warning" href="">Show Chart</a>
+<br />
+<br />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Product Name</th>
+            <th>C_ID</th>
+            <th>Product Price</th>
+            <th>Operation</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.product_id</td>
+                    <td>@item.product_name</td>
+                    <td>@item.category_id</td>
+                    <td>@item.price</td>
+                    <td>
+                        <a class="btn btn-primary" href="/Home/AddChart/@item.product_id">Add Chart</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
