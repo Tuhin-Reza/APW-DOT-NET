@@ -1,5 +1,4 @@
-# APW-DOT-NET
-
+# Relationships between Table
 1.Product and Category:
 -->many-to-one relationship, as multiple products can belong to the same category, but each product typically belongs to only one category.
 (category_id column added in Product Table )
