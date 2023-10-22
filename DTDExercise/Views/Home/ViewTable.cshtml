@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "ViewTable";
+}
+
+<h2>ViewTable</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Day</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.date.ToString("MM/dd/yyyy")</td>
+                    <td>@item.time</td>
+                    <td>@item.dayOfweak</td>
+                    @*<td>
+                            <a class="btn btn-primary" href="/Home/EditCourse/@item.id">Edit</a>
+                            <a class="btn btn-primary" href="/Home/DeleteCourse/@item.id">Delete</a>
+                        </td>*@
+                </tr>
+            }
+
+        }
+
+    </tbody>
+</table>
+<a class="btn btn-primary" href="/Home/Create">Back To Create</a>
+
+
+

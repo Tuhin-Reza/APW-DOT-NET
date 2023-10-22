@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DateTimeDBModelStoreContainer" CdmEntityContainer="DateTimeDBEntities">
+    <EntitySetMapping Name="DateTimeDayTables">
+      <EntityTypeMapping TypeName="DateTimeDBModel.DateTimeDayTable">
+        <MappingFragment StoreEntitySet="DateTimeDayTables">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="dayOfweak" ColumnName="dayOfweak" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
