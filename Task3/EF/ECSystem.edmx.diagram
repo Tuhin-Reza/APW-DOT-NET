@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bf6a03dbde764a8fac820ff6f517686d" Name="Diagram1">
+        <EntityTypeShape EntityType="Task3DBModel.AddChart" Width="1.5" PointX="7.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Task3DBModel.Categore" Width="1.5" PointX="3.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Task3DBModel.History" Width="1.5" PointX="0.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Task3DBModel.Order" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Task3DBModel.Product" Width="1.5" PointX="6.625" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Task3DBModel.ProductsOrder" Width="1.5" PointX="7.625" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Task3DBModel.sysdiagram" Width="1.5" PointX="9.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Task3DBModel.User" Width="1.5" PointX="4.875" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="Task3DBModel.FK_AddCharts_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Task3DBModel.FK_Products_Categores" ManuallyRouted="false" />
+        <AssociationConnector Association="Task3DBModel.FK_Historys_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="Task3DBModel.FK_Historys_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Task3DBModel.FK_Orders_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Task3DBModel.FK_ProductsOrders_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="Task3DBModel.FK_ProductsOrders_Products" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

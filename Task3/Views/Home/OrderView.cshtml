@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "OrderView";
+}
+
+<h2>OrderView</h2>
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Order Date</th>
+                <th>Order Day</th>
+                <th>Order Time</th>
+                <th>Total Price</th>
+                <th>User Id</th>
+                <th>Operation</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.orderDate.ToString("MM/dd/yyyy")</td>
+                    <td>@item.orderDay</td>
+                    <td>@item.orderTime</td>
+                    <td>@item.totalPrice</td>
+                    <td>@item.user_id</td>
+                    <td>
+                        <a href="/Home/OrderDetails/@item.id" class="btn btn-primary">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h4>No items in the cart.</h4>
+}
+<a href="/Home/ProductView" class="btn btn-dark">Back</a>
+

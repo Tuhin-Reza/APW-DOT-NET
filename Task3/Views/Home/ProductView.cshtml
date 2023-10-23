@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "ProductView";
+}
+
+<h2>ProductView</h2>
+
+<a href="/Home/ViewChart" class="btn btn-warning">ViewChart</a>
+<a href="/Home/OrderView" class="btn btn-warning">Order List</a>
+<a href="/Home/History" class="btn btn-warning">History</a>
+<br />
+<br />
+<br />
+<br />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Operation</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.name</td>
+                    <td>@item.price</td>
+                    <td>@item.category_id</td>
+                    <td><a href="/Home/AddChart/@item.id" class="btn btn-primary">Add Chart</a></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

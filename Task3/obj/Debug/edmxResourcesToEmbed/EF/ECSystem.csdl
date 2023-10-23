@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Task3DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AddChart">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_id" Type="Int32" Nullable="false" />
+    <Property Name="product_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="product_price" Type="Int32" Nullable="false" />
+    <Property Name="product_quentity" Type="Int32" Nullable="false" />
+    <Property Name="total_price" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_AddCharts_Users" FromRole="AddCharts" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Categore">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Products_Categores" FromRole="Categores" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="History">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="product_price" Type="Int32" Nullable="false" />
+    <Property Name="product_quentity" Type="Int32" Nullable="false" />
+    <Property Name="totalPrice" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="order_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_Historys_Orders" FromRole="Historys" ToRole="Orders" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Historys_Users" FromRole="Historys" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="orderDay" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="orderTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="totalPrice" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Historys" Relationship="Self.FK_Historys_Orders" FromRole="Orders" ToRole="Historys" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Orders_Users" FromRole="Orders" ToRole="Users" />
+    <NavigationProperty Name="ProductsOrders" Relationship="Self.FK_ProductsOrders_Orders" FromRole="Orders" ToRole="ProductsOrders" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="price" Type="Int32" Nullable="false" />
+    <Property Name="category_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Categore" Relationship="Self.FK_Products_Categores" FromRole="Products" ToRole="Categores" />
+    <NavigationProperty Name="ProductsOrders" Relationship="Self.FK_ProductsOrders_Products" FromRole="Products" ToRole="ProductsOrders" />
+  </EntityType>
+  <EntityType Name="ProductsOrder">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_id" Type="Int32" Nullable="false" />
+    <Property Name="order_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_ProductsOrders_Orders" FromRole="ProductsOrders" ToRole="Orders" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_ProductsOrders_Products" FromRole="ProductsOrders" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AddCharts" Relationship="Self.FK_AddCharts_Users" FromRole="Users" ToRole="AddCharts" />
+    <NavigationProperty Name="Historys" Relationship="Self.FK_Historys_Users" FromRole="Users" ToRole="Historys" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Users" FromRole="Users" ToRole="Orders" />
+  </EntityType>
+  <Association Name="FK_AddCharts_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="AddCharts" Type="Self.AddChart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="AddCharts">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Categores">
+    <End Role="Categores" Type="Self.Categore" Multiplicity="1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categores">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Historys_Orders">
+    <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+    <End Role="Historys" Type="Self.History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Historys">
+        <PropertyRef Name="order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Historys_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Historys" Type="Self.History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Historys">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductsOrders_Orders">
+    <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+    <End Role="ProductsOrders" Type="Self.ProductsOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ProductsOrders">
+        <PropertyRef Name="order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductsOrders_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="1" />
+    <End Role="ProductsOrders" Type="Self.ProductsOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ProductsOrders">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Task3DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AddCharts" EntityType="Self.AddChart" />
+    <EntitySet Name="Categores" EntityType="Self.Categore" />
+    <EntitySet Name="Historys" EntityType="Self.History" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ProductsOrders" EntityType="Self.ProductsOrder" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_AddCharts_Users" Association="Self.FK_AddCharts_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="AddCharts" EntitySet="AddCharts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Categores" Association="Self.FK_Products_Categores">
+      <End Role="Categores" EntitySet="Categores" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Historys_Orders" Association="Self.FK_Historys_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Historys" EntitySet="Historys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Historys_Users" Association="Self.FK_Historys_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Historys" EntitySet="Historys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Users" Association="Self.FK_Orders_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductsOrders_Orders" Association="Self.FK_ProductsOrders_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="ProductsOrders" EntitySet="ProductsOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductsOrders_Products" Association="Self.FK_ProductsOrders_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductsOrders" EntitySet="ProductsOrders" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

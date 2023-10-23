@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "ViewChart";
+}
+
+<h2>ViewChart</h2>
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Product Quentity</th>
+                <th>Total Price</th>
+                <th>User Id</th>
+                <th>Operation</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.product_id</td>
+                    <td>@item.product_name</td>
+                    <td>@item.product_price</td>
+                    <td>@item.product_quentity</td>
+                    <td>@item.total_price</td>
+                    <td>@item.user_id</td>
+                    <td>
+                        <a href="/Home/IncreaseChartItem/@item.product_id" class="btn btn-primary">Increase</a>
+                        <a href="/Home/DecreaseChartItem/@item.product_id" class="btn btn-primary">Decrease</a>
+                        <a href="/Home/DeleteChartItem/@item.id" class="btn btn-primary">Remove</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href="/Home/OrderConfirm" class="btn btn-info">Order Confirm</a>
+}
+else
+{
+    <h4>No items in the cart.</h4>
+}
+<a href="/Home/ProductView" class="btn btn-dark">Back</a>
+

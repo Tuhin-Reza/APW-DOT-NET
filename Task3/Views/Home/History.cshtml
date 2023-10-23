@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "History";
+}
+
+<h2>History</h2>
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Product Quentity</th>
+                <th>Total Price</th>
+                <th>User Id</th>
+                <th>Order Id</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.product_name</td>
+                    <td>@item.product_price</td>
+                    <td>@item.product_quentity</td>
+                    <td>@item.totalPrice</td>
+                    <td>@item.user_id</td>
+                    <td>@item.order_id</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h4>No items in the cart.</h4>
+}
+<a href="/Home/ProductView" class="btn btn-dark">Back</a>
+
