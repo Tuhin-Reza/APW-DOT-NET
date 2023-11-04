@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "ViewStudent";
+}
+
+<h2>ViewStudent</h2>
+
+@if(Model != null)
+{
+    foreach (var item in Model)
+    {
+        @item.id
+        @item.name
+        @item.cgpa
+        @item.deptID
+    }
+}
+

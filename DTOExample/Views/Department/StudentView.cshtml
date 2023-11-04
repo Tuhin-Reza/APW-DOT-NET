@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "StudentView";
+}
+
+<h2>StudentView</h2>
+<a href="/Department/AddStudent" class="btn btn-warning">Add Student</a>
+<br />
+<br />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Department Name</th>
+            <th>Head of Department</th>
+            <th>Student Name</th>
+            <th>Student CGPA</th>
+        </tr>
+    </thead>
+    @foreach (var department in Model)
+    {
+        <tbody>
+
+            @foreach (var student in department.Students)
+            {
+                <tr>
+                    <td>@department.name</td>
+                    <td>@department.headofDept</td>
+                    <td>@student.name</td>
+                    <td>@student.cgpa</td>
+
+                </tr>
+
+            }
+        </tbody>
+    }
+
+</table>
+
+<a href="/Department/DepartmentView" class="btn btn-dark">Back</a>

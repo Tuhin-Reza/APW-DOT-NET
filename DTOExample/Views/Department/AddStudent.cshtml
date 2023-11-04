@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "AddStudent";
+}
+
+<h2>AddStudent</h2>
+<form action="/Department/AddStudent" method="post">
+    Name:
+    <input type="text" name="name" value="@(Model==null ? "":Model.name)" class="form-control" />
+    <span class="text-danger">@Html.ValidationMessage("name")</span><br />
+    CGPA:
+    <input type="text" name="cgpa" value="@(Model==null ? "":Model.cgpa)" class="form-control" />
+    <span class="text-danger">@Html.ValidationMessage("cgpa")</span><br />
+
+    <div>
+        <span class="control-label col-md-2">Department</span>
+        <select class="form-control" name="deptID">
+            <option disabled selected>---Select---</option>
+            @if (ViewBag.DeptData != null)
+            {
+                foreach (var item in ViewBag.DeptData)
+                {
+                    <option value="@item.id">@item.name</option>
+                }
+            }
+
+        </select>
+        <span class="text-danger">@Html.ValidationMessage("deptID")</span>
+    </div><br />
+
+    <input type="submit" value="Submit" class="btn btn-light" /><br /><br />
+</form>
+<a href="/Department/StudentView" class="btn btn-dark">Back</a>

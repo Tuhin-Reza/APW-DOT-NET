@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "DepartmentView";
+}
+
+<h2>DepartmentView</h2>
+<a href="/Department/AddDepartment" class="btn btn-warning">Add Department</a>
+<a href="/Department/StudentView" class="btn btn-warning">Student View</a>
+<br />
+<br />
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Department Name</th>
+                <th>Department Head</th>
+                <th>Operation</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.name</td>
+                    <td>@item.headofDept</td>
+                    <td>
+                        <a href="/Student/EditDepartment/@item.id" class="btn btn-primary">Edit</a>
+                        <a href="/Student/RemoveDepartment/@item.id" class="btn btn-primary">Remove</a>
+                        <a href="/Student/EditDepartment/@item.id" class="btn btn-primary">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h4>No items in the cart.</h4>
+}
+<a href="/Home/Index" class="btn btn-dark">Back</a>

@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "AddDepartment";
+}
+
+<h2>AddDepartment</h2>
+<form action="https://localhost:44383/Department/AddDepartment" method="post">
+    Name:
+    <input type="text" name="name" value="@(Model==null ? "":Model.name)" class="form-control" />
+    <span class="text-danger">@Html.ValidationMessage("name")</span><br />
+
+    HeadofDept:
+    <input type="text" name="headofDept" value="@(Model==null ? "":Model.headofDept)" class="form-control" />
+    <span class="text-danger">@Html.ValidationMessage("headofDept")</span><br />
+
+    <input type="submit" value="Submit" class="btn btn-light" /><br /><br />
+</form>
+<a href="/Department/DepartmentView" class="btn btn-dark">Back</a>
