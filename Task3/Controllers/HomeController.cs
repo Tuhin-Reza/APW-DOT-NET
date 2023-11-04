@@ -1,32 +1,38 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using Task3.AUTH;
 using Task3.EF;
+using Task3.Models;
 
 namespace Task3.Controllers
 {
+    [Logged]
     public class HomeController : Controller
     {
-        private int userId;
         private Task3DBEntities db;
-        //This line declares a private field named db of type Task3DBEntities.
-        //This field will be used to store an instance of the Task3DBEntities class, 
-        //which represents your database context.
+        private HttpCookie cartCookie;
         public HomeController()
         {
-            userId = 1101;
             db = new Task3DBEntities();
+            cartCookie = new HttpCookie("CartItems");
         }
-        //In the constructor of your HomeController is initializing a field named 
-        //db with a new instance of the Task3DBEntities class, which represents
-        //my Entity Framework database context.
+
+        public ActionResult Signout()
+        {
+            Session.RemoveAll();
+            Session.Clear();
+            return RedirectToAction("Signin", "Register");
+        }
 
         public ActionResult ProductView()
         {
             var data = db.Products.ToList();
             return View(data);
         }
-
 
         public ActionResult AddChart(int id)
         {
@@ -36,110 +42,166 @@ namespace Task3.Controllers
                 return RedirectToAction("ProductView");
             }
 
-            var existingCartItem = db.AddCharts.SingleOrDefault(item => item.product_id == id);
-            if (existingCartItem != null)
+            List<CartItem> cartItemList = new List<CartItem>();
+            if (Request.Cookies["CartItems"] != null)
             {
+                var cartData = Request.Cookies["CartItems"].Value;
+                cartItemList = JsonConvert.DeserializeObject<List<CartItem>>(cartData);
+            }
+            bool productExistsInCart = false;
 
-                existingCartItem.product_quentity++;
-                existingCartItem.total_price = existingCartItem.product_price * existingCartItem.product_quentity;
-                db.SaveChanges();
-                return RedirectToAction("ProductView");
-            }
-            else
+            foreach (var item in cartItemList)
             {
-                var cartItem = new AddChart
+                if (item.ProductId == id)
                 {
-                    product_id = product.id,
-                    product_name = product.name,
-                    product_price = product.price,
-                    product_quentity = 1,
-                    total_price = product.price,
-                    user_id = userId,
-                };
-                db.AddCharts.Add(cartItem);
-                db.SaveChanges();
+                    item.ProductQuantity++;
+                    item.TotalPrice = item.ProductPrice * item.ProductQuantity;
+                    productExistsInCart = true;
+                    break;
+                }
             }
+
+            if (!productExistsInCart)
+            {
+                CartItem item = new CartItem
+                {
+                    ProductId = product.id,
+                    ProductName = product.name,
+                    ProductPrice = product.price,
+                    ProductQuantity = 1,
+                    TotalPrice = product.price,
+                    UserId = SessionUser.id
+                };
+                cartItemList.Add(item);
+            }
+
+            string updatedCartData = JsonConvert.SerializeObject(cartItemList);
+            updateCartCookie(updatedCartData);
             return RedirectToAction("ProductView");
         }
 
-
         public ActionResult ViewChart()
         {
-            var data = db.AddCharts.Where(item => item.user_id == userId).ToList();
-            return View(data);
-        }
 
+            List<CartItem> cartItemList = new List<CartItem>();
+            if (Request.Cookies["CartItems"] != null)
+            {
+                var cartData = Request.Cookies["CartItems"].Value;
+                cartItemList = JsonConvert.DeserializeObject<List<CartItem>>(cartData);
+            }
+            foreach (var item in cartItemList)
+            {
+                if (item.UserId == SessionUser.id)
+                {
+                    return View(cartItemList);
+                }
+            }
+            return View();
+        }
 
         public ActionResult DeleteChartItem(int id)
         {
-            var existingCartItem = db.AddCharts.Find(id);
-            db.AddCharts.Remove(existingCartItem);
-            db.SaveChanges();
+            List<CartItem> cartItemList = new List<CartItem>();
+            if (Request.Cookies["CartItems"] != null)
+            {
+                var cartData = Request.Cookies["CartItems"].Value;
+                cartItemList = JsonConvert.DeserializeObject<List<CartItem>>(cartData);
+            }
+            var itemToRemove = (from item in cartItemList
+                                where item.ProductId == id
+                                select item).SingleOrDefault();
+            if (itemToRemove != null)
+            {
+                cartItemList.Remove(itemToRemove);
+            }
+
+
+            string updatedCartData = JsonConvert.SerializeObject(cartItemList);
+            updateCartCookie(updatedCartData);
             return RedirectToAction("ViewChart");
         }
-
 
         public ActionResult IncreaseChartItem(int id)
         {
-            var existingCartItem = db.AddCharts.SingleOrDefault(item => item.product_id == id);
-            existingCartItem.product_quentity++;
-            existingCartItem.total_price = existingCartItem.product_price * existingCartItem.product_quentity;
-            db.SaveChanges();
+            List<CartItem> cartItemList = new List<CartItem>();
+            if (Request.Cookies["CartItems"] != null)
+            {
+                var cartData = Request.Cookies["CartItems"].Value;
+                cartItemList = JsonConvert.DeserializeObject<List<CartItem>>(cartData);
+            }
+            foreach (var item in cartItemList)
+            {
+                if (item.ProductId == id)
+                {
+                    item.ProductQuantity++;
+                    item.TotalPrice = item.ProductPrice * item.ProductQuantity;
+                    break;
+                }
+            }
+            string updatedCartData = JsonConvert.SerializeObject(cartItemList);
+            updateCartCookie(updatedCartData);
             return RedirectToAction("ViewChart");
         }
-
 
         public ActionResult DecreaseChartItem(int id)
         {
-            var existingCartItem = db.AddCharts.SingleOrDefault(item => item.product_id == id);
-
-            //var existingCartItem = (from item in db.AddCharts
-            //                        where item.product_id == id
-            //                        select item).SingleOrDefault();
-            if (existingCartItem != null)
+            List<CartItem> cartItemList = new List<CartItem>();
+            if (Request.Cookies["CartItems"] != null)
             {
-                if (existingCartItem.product_quentity > 1)
+                var cartData = Request.Cookies["CartItems"].Value;
+                cartItemList = JsonConvert.DeserializeObject<List<CartItem>>(cartData);
+            }
+            foreach (var item in cartItemList)
+            {
+                if (item.ProductId == id)
                 {
-                    existingCartItem.product_quentity--;
-                    existingCartItem.total_price = existingCartItem.product_price * existingCartItem.product_quentity;
-                    db.SaveChanges();
-                }
-                else
-                {
-                    db.AddCharts.Remove(existingCartItem);
-                    db.SaveChanges();
+                    if (item.ProductQuantity > 1)
+                    {
+                        item.ProductQuantity--;
+                        item.TotalPrice = item.ProductPrice * item.ProductQuantity;
+                        break;
+                    }
+
                 }
             }
+            string updatedCartData = JsonConvert.SerializeObject(cartItemList);
+            updateCartCookie(updatedCartData);
             return RedirectToAction("ViewChart");
-        }
 
+        }
 
         public ActionResult OrderConfirm()
         {
-            var cartItems = db.AddCharts.Where(item => item.user_id == userId).ToList();
 
-            if (cartItems.Any())
+            List<CartItem> cartItemList = new List<CartItem>();
+            if (Request.Cookies["CartItems"] != null)
+            {
+                var cartData = Request.Cookies["CartItems"].Value;
+                cartItemList = JsonConvert.DeserializeObject<List<CartItem>>(cartData);
+            }
+            if (cartItemList != null)
             {
                 var order = new Order
                 {
                     orderDate = DateTime.Now,
                     orderDay = DateTime.Now.ToString("dddd"),
                     orderTime = DateTime.Now.ToString("hh:mm tt"),
-                    totalPrice = cartItems.Sum(item => item.total_price),
-                    user_id = userId
+                    totalPrice = (from item in cartItemList
+                                  select item.TotalPrice).Sum(),
+                    user_id = SessionUser.id
                 };
                 db.Orders.Add(order);
                 db.SaveChanges();
 
-                foreach (var cartItem in cartItems)
+                foreach (var cartItem in cartItemList)
                 {
                     var history = new History
                     {
-                        product_name = cartItem.product_name,
-                        product_price = cartItem.product_price,
-                        product_quentity = cartItem.product_quentity,
-                        totalPrice = cartItem.total_price,
-                        user_id = userId,
+                        product_name = cartItem.ProductName,
+                        product_price = cartItem.ProductPrice,
+                        product_quentity = cartItem.ProductQuantity,
+                        totalPrice = cartItem.TotalPrice,
+                        user_id = SessionUser.id,
                         order_id = order.id // Link to the newly created order
                     };
                     db.Historys.Add(history);
@@ -147,42 +209,62 @@ namespace Task3.Controllers
                 }
 
                 // 4. Create ProductsOrder records for each product in the user's cart.
-                foreach (var cartItem in cartItems)
+                foreach (var cartItem in cartItemList)
                 {
                     var productsOrder = new ProductsOrder
                     {
-                        product_id = cartItem.product_id,
+                        product_id = cartItem.ProductId,
                         order_id = order.id // Link to the newly created order
                     };
                     db.ProductsOrders.Add(productsOrder);
                     db.SaveChanges();
                 }
 
-                if (cartItems.Any())
-                {
-                    db.AddCharts.RemoveRange(cartItems); // Remove all items from the cart
-                    db.SaveChanges();
-                }
+                cartCookie.Expires = DateTime.Now.AddSeconds(-1);
+                Response.Cookies.Add(cartCookie);
             }
-            return RedirectToAction("ProductView");
+            TempData["confirm"] = "done";
+            return RedirectToAction("OrderView");
         }
 
         public ActionResult OrderView()
         {
-            var data = db.Orders.Where(item => item.user_id == userId).ToList();
-            return View(data);
+            var orderlist = (from Items in db.Orders
+                             where Items.user_id == SessionUser.id
+                             select Items).ToList();
+
+            return View(orderlist);
         }
 
         public ActionResult History()
         {
-            var data = db.Historys.Where(item => item.user_id == userId).ToList();
-            return View(data);
+            var history = (from Items in db.Historys
+                           where Items.user_id == SessionUser.id
+                           select Items).ToList();
+
+            return View(history);
         }
 
         public ActionResult OrderDetails(int id)
         {
-            var data = db.Historys.Where(item => item.order_id == id).ToList();
-            return View(data);
+            var orderdetails = (from Items in db.Historys
+                                where Items.order_id == id
+                                select Items).ToList();
+            return View(orderdetails);
+        }
+
+        private void updateCartCookie(string cartData)
+        {
+            cartCookie.Value = cartData;
+            cartCookie.Expires = DateTime.Now.AddSeconds(240);
+            Response.Cookies.Add(cartCookie);
+        }
+        private User SessionUser
+        {
+            get
+            {
+                return Session["UserData"] as User;
+            }
         }
     }
 }

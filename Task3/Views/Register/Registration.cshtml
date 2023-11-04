@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Registration</h2>
+<form action="/Register/Registration" method="post">
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">User Name</label>
+        <input type="text" class="form-control" id="name" name="name" value="@(Model==null ? "":Model.name)" placeholder="example1">
+        <span class="text-danger">@Html.ValidationMessage("Name")</span>
+    </div><br />
+
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="password" name="password" value="" placeholder="ex1-sc">
+        <span class="text-danger">@Html.ValidationMessage("Password")</span>
+    </div><br />
+    <button type="submit" class="btn btn-primary">Signup</button><br />
+    <span class="message">Already registered? <a href="/Register/Signin">Signin</a></span>
+</form>
+
+

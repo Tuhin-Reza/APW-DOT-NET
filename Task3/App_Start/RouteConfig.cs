@@ -12,7 +12,7 @@ namespace Task3
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "ProductView", id = UrlParameter.Optional }
+                defaults: new { controller = "Register", action = "Signin", id = UrlParameter.Optional }
             );
         }
     }

@@ -9,7 +9,6 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Product Id</th>
                 <th>Product Name</th>
                 <th>Product Price</th>
@@ -23,23 +22,43 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.id</td>
-                    <td>@item.product_id</td>
-                    <td>@item.product_name</td>
-                    <td>@item.product_price</td>
-                    <td>@item.product_quentity</td>
-                    <td>@item.total_price</td>
-                    <td>@item.user_id</td>
+                    <td>@item.ProductId</td>
+                    <td>@item.ProductName</td>
+                    <td>@item.ProductPrice</td>
+                    <td>@item.ProductQuantity</td>
+                    <td>@item.TotalPrice</td>
+                    <td>@item.UserId</td>
                     <td>
-                        <a href="/Home/IncreaseChartItem/@item.product_id" class="btn btn-primary">Increase</a>
-                        <a href="/Home/DecreaseChartItem/@item.product_id" class="btn btn-primary">Decrease</a>
-                        <a href="/Home/DeleteChartItem/@item.id" class="btn btn-primary">Remove</a>
+                        <a href="/Home/IncreaseChartItem/@item.ProductId" class="btn btn-primary">Increase</a>
+                        <a href="/Home/DecreaseChartItem/@item.ProductId" class="btn btn-primary">Decrease</a>
+                        <a href="/Home/DeleteChartItem/@item.ProductId" class="btn btn-primary">Remove</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    <a href="/Home/OrderConfirm" class="btn btn-info">Order Confirm</a>
+    @*<a href="/Home/OrderConfirm" class="btn btn-info">Order Confirm</a>*@
+    <a href="/Home/OrderConfirm" class="btn btn-info" onclick="showAlert(event)">Order Confirm</a>
+    <script>
+        function showAlert(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure ?',
+                text: 'your orer is confirm now',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.assign('/Home/OrderConfirm');
+                }
+            });
+        }
+    </script>
 }
 else
 {

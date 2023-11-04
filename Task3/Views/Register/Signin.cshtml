@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Signin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Signin</h2>
+<form action="/Register/Signin" method="post">
+    <div class="form-group">
+        <label for="exampleInputEmail1">User Name</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="UserName">
+        <span class="text-danger">@Html.ValidationMessage("name")</span>        
+    </div><br />
+
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        <span class="text-danger">@Html.ValidationMessage("password")</span>
+    </div>
+    <span class="text-danger">
+        @if (@TempData["user"] != null)
+        {
+            <script>
+                swal("Opps...", "Incorrect username/password", "error")
+            </script>
+            @*@TempData["user"]*@
+        }
+    </span><br />
+
+<button type="submit" class="btn btn-primary">Signin</button><br />
+<span class="message">Not registered? <a href="/Register/Registration">Create Account</a></span>
+</form>

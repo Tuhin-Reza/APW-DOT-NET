@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -24,7 +26,19 @@
             </div>
         </div>
     </nav>
+  
     <div class="container body-content">
+        @{
+            var user = Session["userData"] as Task3.EF.User;
+            if (user != null)
+            {
+                <div>
+                    <p>ID: @user.id</p>
+                    <p>Name: @user.name</p>
+                    <p>Password: @user.password</p>
+                </div>
+            }
+        }
         @RenderBody()
         <hr />
         <footer>

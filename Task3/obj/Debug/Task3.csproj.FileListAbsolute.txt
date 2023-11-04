@@ -81,3 +81,5 @@ F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\1.Mid_Term\2.Lab\4.Lab_Task\Task3\Tas
 F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\1.Mid_Term\2.Lab\4.Lab_Task\Task3\Task3\obj\Debug\Task3.csproj.CopyComplete
 F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\1.Mid_Term\2.Lab\4.Lab_Task\Task3\Task3\obj\Debug\Task3.dll
 F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\1.Mid_Term\2.Lab\4.Lab_Task\Task3\Task3\obj\Debug\Task3.pdb
+F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\1.Mid_Term\2.Lab\4.Lab_Task\Task3\Task3\bin\AutoMapper.dll
+F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\1.Mid_Term\2.Lab\4.Lab_Task\Task3\Task3\bin\AutoMapper.xml
