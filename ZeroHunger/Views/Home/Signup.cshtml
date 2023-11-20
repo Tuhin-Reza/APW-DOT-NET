@@ -1,0 +1,83 @@
+﻿@model ZeroHunger.DTOS.RestaurantDTO
+
+@{
+    ViewBag.Title = "Signup";
+}
+
+<h2>Signup</h2>
+<form action="/Home/Signup" method="post">
+
+    <div class="form-group">
+        <label for="name">Restaurant Name:</label>
+        <input type="text" class="form-control" id="name" name="restaurantName" value="@(Model==null ? "":Model.restaurantName)" placeholder="Enter name">
+        <span class="text-danger">@Html.ValidationMessage("restaurantName")</span><br />
+
+    </div>
+
+    <div class="form-group">
+        <label for="location">Location:</label>
+        <input type="text" class="form-control" id="location" name="location" value="@(Model==null ? "":Model.location)" placeholder="Enter location">
+        <span class="text-danger">@Html.ValidationMessage("location")</span><br />
+
+    </div>
+
+    <div class="form-group">
+        <label for="contactPersonName">Contact Person Name:</label>
+        <input type="text" class="form-control" id="contactPersonName" name="contactPersonName" value="@(Model==null ? "":Model.contactPersonName)" placeholder="Enter contact person name">
+        <span class="text-danger">@Html.ValidationMessage("contactPersonName")</span><br />
+
+    </div>
+
+    <div class="form-group">
+        <label for="contactPersonNumber">Contact Person Number:</label>
+        <input type="text" class="form-control" id="contactPersonNumber" name="contactPersonNumber" value="@(Model==null ? "":Model.contactPersonNumber)" placeholder="Enter contact person number">
+        <span class="text-danger">@Html.ValidationMessage("contactPersonNumber")</span><br />
+    </div>
+
+    <div class="form-group">
+        <label for="contactPersonDesignation">Contact Person Designation:</label>
+        <select class="form-control" id="contactPersonDesignation" name="contactPersonDesignation">
+            <option disabled selected>---Select Person Designation---</option>
+            <option value="Owner">Owner</option>
+            <option value="Manager">Manager</option>
+            <option value="Head Chef">Head Chef</option>
+            <option value="Food Manager">Food Manager</option>
+        </select>
+        <span class="text-danger">@Html.ValidationMessage("contactPersonDesignation")</span><br />
+    </div>
+
+
+    <div class="form-group">
+        <label for="restaurantType">Restaurant Type:</label>
+        <select class="form-control" id="restaurantType" name="restaurantType">
+            <option disabled selected>---Select Restaurant Type---</option>
+            <option value="Vegetarian">Vegetarian</option>
+            <option value="Only Lunch">Only Lunch</option>
+            <option value="Only Dinner">Only Dinner</option>
+            <option value="AfternoonMeal">Afternoon Meal</option>
+            <option value="All">All (Breakfast + Lunch + Dinner)</option>
+        </select>
+        <span class="text-danger">@Html.ValidationMessage("restaurantType")</span><br />
+    </div>
+
+
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" name="email" value="@(Model==null ? "":Model.email)" placeholder="Enter email">
+        <span class="text-danger">@Html.ValidationMessage("email")</span><br />
+    </div>
+
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" class="form-control" id="username" name="username" value="@(Model==null ? "":Model.username)" placeholder="Enter username">
+        <span class="text-danger">@Html.ValidationMessage("username")</span><br />
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="password" value="@(Model==null ? "":Model.password)" placeholder="Enter password">
+        <span class="text-danger">@Html.ValidationMessage("password")</span><br />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Signup</button>
+</form>

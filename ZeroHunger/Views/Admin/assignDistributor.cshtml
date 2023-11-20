@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "assignDistributor";
+}
+
+<h2>Assign Distributor</h2>
+<a href="/Admin/Index" class="btn btn-secondary">Back</a>
+<form action="/Admin/assignDistributor" method="post">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" value="@(Model == null ? "" : Model.name)">
+        <span class="text-danger">@Html.ValidationMessage("name")</span>
+    </div>
+
+    <div class="form-group">
+        <label for="contactNumber">Contact Number:</label>
+        <input type="text" class="form-control" id="contactNumber" name="contactNumber" placeholder="Enter Contact Number" value="@(Model == null ? "" : Model.contactNumber)">
+        <span class="text-danger">@Html.ValidationMessage("contactNumber")</span>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" value="@(Model == null ? "" : Model.email)">
+        <span class="text-danger">@Html.ValidationMessage("email")</span>
+    </div>
+
+
+    <div class="form-group">
+        <label for="area">Area:</label>
+        <select class="form-control" id="area" name="area">
+            <option value="" disabled selected>---Select Area---</option>
+            <option value="area1">Area 1</option>
+            <option value="area2">Area 2</option>
+            <option value="area3">Area 3</option>
+            <option value="area4">Area 4</option>
+            <option value="area5">Area 5</option>
+        </select>
+        <span class="text-danger">@Html.ValidationMessage("area")</span>
+    </div>
+
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" class="form-control" id="username" name="username" value="@(Model==null ? "":Model.username)" placeholder="Enter username">
+        <span class="text-danger">@Html.ValidationMessage("username")</span><br />
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="password" value="@(Model==null ? "":Model.password)" placeholder="Enter password">
+        <span class="text-danger">@Html.ValidationMessage("password")</span><br />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

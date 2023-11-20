@@ -1,0 +1,78 @@
+﻿@model ZeroHunger.DTOS.FoodCollectRequestDTO
+
+@{
+    ViewBag.Title = "CreateFoodCollectRequest";
+}
+
+
+<h2>CreateFoodCollectRequest</h2>
+
+<main>
+    <form action="/Restaurant/CreateFoodCollectRequest" method="post">
+        <div class="form-group">
+            <label for="foodType">Food Type:</label>
+            <select class="form-control" id="foodType" name="foodType">
+                <option disabled selected>---Select Food Type---</option>
+                <option value="Prepared Meals">Prepared Meals</option>
+                <option value="Fresh Product">Fresh Product</option>
+                <option value="Frozen Foods">Frozen Foods</option>
+            </select>
+            <span class="text-danger">@Html.ValidationMessage("foodType")</span><br />
+        </div>
+
+
+        <div class="form-group">
+            <label for="packagingType">Packaging Type:</label>
+            <select class="form-control" id="packagingType" name="packagingType">
+                <option disabled selected>---Select Packaging Type---</option>
+                <option value="Cartons">Cartons</option>
+                <option value="Box">Box</option>
+                <option value="Bag">Bag</option>
+                <option value="FlexiblePackaging">Flexible Packaging</option>
+            </select>
+            <span class="text-danger">@Html.ValidationMessage("packagingType")</span><br />
+        </div>
+
+
+        <div class="form-group">
+            <label for="numberofPackages">Number of Packages:</label>
+            <input type="number" class="form-control" id="numberofPackages" name="numberofPackages" value="@(Model == null ? 0 : Model.numberofPackages)" placeholder="Enter number of packages" min="0">
+            <span class="text-danger">@Html.ValidationMessage("numberofPackages")</span><br />
+        </div>
+
+
+        <div class="form-group">
+            <label for="foodDescription">Food Description:</label>
+            <textarea class="form-control" id="foodDescription" name="foodDescription" value="@(Model==null ? "":Model.foodDescription)" placeholder="Enter food description"></textarea>
+            <span class="text-danger">@Html.ValidationMessage("foodDescription")</span><br />
+        </div>
+
+        <div class="form-group">
+            <label for="availableDate">Available Date:</label>
+            <input type="date" class="form-control" id="availableDate" name="availableDate">
+            <span class="text-danger">@Html.ValidationMessage("availableDate")</span><br />
+        </div>
+
+        <div class="form-group">
+            <label for="preferredCollectTime">Preferred Collection Time:</label>
+            <input type="time" class="form-control" id="preferredCollectTime" name="preferredCollectTime">
+            <span class="text-danger">@Html.ValidationMessage("preferredCollectTime")</span><br />
+        </div>
+
+        <div class="form-group">
+            <label for="expiryDate">Expiry Date:</label>
+            <input type="date" class="form-control" id="expiryDate" name="expiryDate">
+            <span class="text-danger">@Html.ValidationMessage("expiryDate")</span><br />
+        </div>
+
+        <div class="form-group">
+            <label for="pickUpLocation">Pickup Location:</label>
+            <input type="text" class="form-control" id="pickUpLocation" name="pickUpLocation" value="@(Model==null ? "":Model.pickUpLocation)" placeholder="Enter pickup location">
+            <span class="text-danger">@Html.ValidationMessage("pickUpLocation")</span><br />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-outline-info btn-rounded" data-mdb-ripple-color="dark">Request Submit</button>
+    </form>
+</main>
+<br/>
+<a href="/Restaurant/Index" class="btn btn-secondary">Back</a>

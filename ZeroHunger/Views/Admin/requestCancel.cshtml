@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "requestCancel";
+}
+
+<h2>Request Cancel</h2>
+<a href="/Admin/Index" class="btn btn-secondary">Back</a><br/><br/>
+<form action="/Admin/requestCancel" method="post">
+
+    <input type="hidden" name="id" value="@Model">
+
+    <div class="form-group">
+        <label for="reason">Reason:</label>
+        <select class="form-control" id="reason" name="reason">
+            <option disabled selected>---Select Cancel Reason---</option>
+            <option value="Lack of available staff">Lack of available staff</option>
+            <option value="Lack of vehicles">Lack of vehicles</option>
+            <option value="Lack of storage capacity">Lack of storage capacity</option>
+            <option value="Already Accept Similar Food Items">Already Accept Similar Food Items</option>
+            <option value="Unexpected Circumstance">Unexpected Circumstance</option>
+        </select>
+        <span class="text-danger">@Html.ValidationMessage("reason")</span><br />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

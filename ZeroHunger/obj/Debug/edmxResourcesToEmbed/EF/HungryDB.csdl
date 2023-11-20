@@ -1,0 +1,504 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ZeroHungerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="contactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Admins_Users" FromRole="Admins" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="CollectorHistory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="collectDate" Type="DateTime" Precision="3" />
+    <Property Name="collectTime" Type="DateTime" Precision="3" />
+    <Property Name="pickUpLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TransportationMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="deliveryLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="handoverDate" Type="DateTime" Precision="3" />
+    <Property Name="handoverTime" Type="DateTime" Precision="3" />
+    <Property Name="requestID" Type="Int32" />
+    <Property Name="distributorID" Type="Int32" />
+    <Property Name="collectorID" Type="Int32" />
+    <NavigationProperty Name="Collector" Relationship="Self.FK_CollectorHistorys_Collectors" FromRole="CollectorHistorys" ToRole="Collectors" />
+    <NavigationProperty Name="Distributor" Relationship="Self.FK_CollectorHistorys_Distributors" FromRole="CollectorHistorys" ToRole="Distributors" />
+    <NavigationProperty Name="FoodCollectRequest" Relationship="Self.FK_CollectorHistorys_FoodCollectRequests" FromRole="CollectorHistorys" ToRole="FoodCollectRequests" />
+  </EntityType>
+  <EntityType Name="Collector">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="contactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vehicleType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CollectorHistorys" Relationship="Self.FK_CollectorHistorys_Collectors" FromRole="Collectors" ToRole="CollectorHistorys" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Collectors_Users" FromRole="Collectors" ToRole="Users" />
+    <NavigationProperty Name="DistributorHistorys" Relationship="Self.FK_DistributorHistorys_Collectors" FromRole="Collectors" ToRole="DistributorHistorys" />
+    <NavigationProperty Name="FoodCollectRequestHistorys" Relationship="Self.FK_FoodCollectRequestHistorys_Collectors" FromRole="Collectors" ToRole="FoodCollectRequestHistorys" />
+    <NavigationProperty Name="Processings" Relationship="Self.FK_Processings_Collectors" FromRole="Collectors" ToRole="Processings" />
+  </EntityType>
+  <EntityType Name="DistributorHistory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="collectDate" Type="DateTime" Precision="3" />
+    <Property Name="collectTime" Type="DateTime" Precision="3" />
+    <Property Name="distributeStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="distributereason" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="distributeDate" Type="DateTime" Precision="3" />
+    <Property Name="distributTime" Type="DateTime" Precision="3" />
+    <Property Name="distributeLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="receiverType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="numberofReceiver" Type="Int32" />
+    <Property Name="requestID" Type="Int32" />
+    <Property Name="collectorID" Type="Int32" />
+    <Property Name="distributorID" Type="Int32" />
+    <NavigationProperty Name="Collector" Relationship="Self.FK_DistributorHistorys_Collectors" FromRole="DistributorHistorys" ToRole="Collectors" />
+    <NavigationProperty Name="Distributor" Relationship="Self.FK_DistributorHistorys_Distributors" FromRole="DistributorHistorys" ToRole="Distributors" />
+    <NavigationProperty Name="FoodCollectRequest" Relationship="Self.FK_DistributorHistorys_FoodCollectRequests" FromRole="DistributorHistorys" ToRole="FoodCollectRequests" />
+  </EntityType>
+  <EntityType Name="Distributor">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="contactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="area" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CollectorHistorys" Relationship="Self.FK_CollectorHistorys_Distributors" FromRole="Distributors" ToRole="CollectorHistorys" />
+    <NavigationProperty Name="DistributorHistorys" Relationship="Self.FK_DistributorHistorys_Distributors" FromRole="Distributors" ToRole="DistributorHistorys" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Distributors_Users" FromRole="Distributors" ToRole="Users" />
+    <NavigationProperty Name="FoodCollectRequestHistorys" Relationship="Self.FK_FoodCollectRequestHistorys_Distributors" FromRole="Distributors" ToRole="FoodCollectRequestHistorys" />
+    <NavigationProperty Name="Processings" Relationship="Self.FK_Processings_Distributors" FromRole="Distributors" ToRole="Processings" />
+  </EntityType>
+  <EntityType Name="FoodCollectRequestHistory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="requestStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="collectReason" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="collectDate" Type="DateTime" Precision="3" />
+    <Property Name="collectTime" Type="DateTime" Precision="3" />
+    <Property Name="requestID" Type="Int32" />
+    <Property Name="restaurantID" Type="Int32" />
+    <Property Name="collectorID" Type="Int32" />
+    <Property Name="distributorID" Type="Int32" />
+    <NavigationProperty Name="Collector" Relationship="Self.FK_FoodCollectRequestHistorys_Collectors" FromRole="FoodCollectRequestHistorys" ToRole="Collectors" />
+    <NavigationProperty Name="Distributor" Relationship="Self.FK_FoodCollectRequestHistorys_Distributors" FromRole="FoodCollectRequestHistorys" ToRole="Distributors" />
+    <NavigationProperty Name="FoodCollectRequest" Relationship="Self.FK_FoodCollectRequestHistorys_FoodCollectRequests" FromRole="FoodCollectRequestHistorys" ToRole="FoodCollectRequests" />
+    <NavigationProperty Name="Restaurant" Relationship="Self.FK_FoodCollectRequestHistorys_Restaurants" FromRole="FoodCollectRequestHistorys" ToRole="Restaurants" />
+  </EntityType>
+  <EntityType Name="FoodCollectRequest">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="foodType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="packagingType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="numberofPackages" Type="Int32" Nullable="false" />
+    <Property Name="foodDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="availableDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="preferredCollectTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="expiryDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="pickUpLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="statusType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="retaurantID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CollectorHistorys" Relationship="Self.FK_CollectorHistorys_FoodCollectRequests" FromRole="FoodCollectRequests" ToRole="CollectorHistorys" />
+    <NavigationProperty Name="DistributorHistorys" Relationship="Self.FK_DistributorHistorys_FoodCollectRequests" FromRole="FoodCollectRequests" ToRole="DistributorHistorys" />
+    <NavigationProperty Name="FoodCollectRequestHistorys" Relationship="Self.FK_FoodCollectRequestHistorys_FoodCollectRequests" FromRole="FoodCollectRequests" ToRole="FoodCollectRequestHistorys" />
+    <NavigationProperty Name="Restaurant" Relationship="Self.FK_FoodCollectRequests_Restaurants" FromRole="FoodCollectRequests" ToRole="Restaurants" />
+    <NavigationProperty Name="Processings" Relationship="Self.FK_Processings_FoodCollectRequests" FromRole="FoodCollectRequests" ToRole="Processings" />
+  </EntityType>
+  <EntityType Name="Processing">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="requestID" Type="Int32" />
+    <Property Name="collectorID" Type="Int32" />
+    <Property Name="distributorID" Type="Int32" />
+    <NavigationProperty Name="Collector" Relationship="Self.FK_Processings_Collectors" FromRole="Processings" ToRole="Collectors" />
+    <NavigationProperty Name="Distributor" Relationship="Self.FK_Processings_Distributors" FromRole="Processings" ToRole="Distributors" />
+    <NavigationProperty Name="FoodCollectRequest" Relationship="Self.FK_Processings_FoodCollectRequests" FromRole="Processings" ToRole="FoodCollectRequests" />
+  </EntityType>
+  <EntityType Name="Restaurant">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="restaurantName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="contactPersonName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="contactPersonNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="contactPersonDesignation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="restaurantType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FoodCollectRequestHistorys" Relationship="Self.FK_FoodCollectRequestHistorys_Restaurants" FromRole="Restaurants" ToRole="FoodCollectRequestHistorys" />
+    <NavigationProperty Name="FoodCollectRequests" Relationship="Self.FK_FoodCollectRequests_Restaurants" FromRole="Restaurants" ToRole="FoodCollectRequests" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Restaurants_Users" FromRole="Restaurants" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="roleID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Admins" Relationship="Self.FK_Admins_Users" FromRole="Users" ToRole="Admins" />
+    <NavigationProperty Name="Collectors" Relationship="Self.FK_Collectors_Users" FromRole="Users" ToRole="Collectors" />
+    <NavigationProperty Name="Distributors" Relationship="Self.FK_Distributors_Users" FromRole="Users" ToRole="Distributors" />
+    <NavigationProperty Name="Restaurants" Relationship="Self.FK_Restaurants_Users" FromRole="Users" ToRole="Restaurants" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+  </EntityType>
+  <Association Name="FK_Admins_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Admins" Type="Self.Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Admins">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CollectorHistorys_Collectors">
+    <End Role="Collectors" Type="Self.Collector" Multiplicity="0..1" />
+    <End Role="CollectorHistorys" Type="Self.CollectorHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Collectors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CollectorHistorys">
+        <PropertyRef Name="collectorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CollectorHistorys_Distributors">
+    <End Role="Distributors" Type="Self.Distributor" Multiplicity="0..1" />
+    <End Role="CollectorHistorys" Type="Self.CollectorHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Distributors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CollectorHistorys">
+        <PropertyRef Name="distributorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CollectorHistorys_FoodCollectRequests">
+    <End Role="FoodCollectRequests" Type="Self.FoodCollectRequest" Multiplicity="0..1" />
+    <End Role="CollectorHistorys" Type="Self.CollectorHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FoodCollectRequests">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CollectorHistorys">
+        <PropertyRef Name="requestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Collectors_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Collectors" Type="Self.Collector" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Collectors">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DistributorHistorys_Collectors">
+    <End Role="Collectors" Type="Self.Collector" Multiplicity="0..1" />
+    <End Role="DistributorHistorys" Type="Self.DistributorHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Collectors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DistributorHistorys">
+        <PropertyRef Name="collectorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FoodCollectRequestHistorys_Collectors">
+    <End Role="Collectors" Type="Self.Collector" Multiplicity="0..1" />
+    <End Role="FoodCollectRequestHistorys" Type="Self.FoodCollectRequestHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Collectors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="FoodCollectRequestHistorys">
+        <PropertyRef Name="collectorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Processings_Collectors">
+    <End Role="Collectors" Type="Self.Collector" Multiplicity="0..1" />
+    <End Role="Processings" Type="Self.Processing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Collectors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Processings">
+        <PropertyRef Name="collectorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DistributorHistorys_Distributors">
+    <End Role="Distributors" Type="Self.Distributor" Multiplicity="0..1" />
+    <End Role="DistributorHistorys" Type="Self.DistributorHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Distributors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DistributorHistorys">
+        <PropertyRef Name="distributorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DistributorHistorys_FoodCollectRequests">
+    <End Role="FoodCollectRequests" Type="Self.FoodCollectRequest" Multiplicity="0..1" />
+    <End Role="DistributorHistorys" Type="Self.DistributorHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FoodCollectRequests">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DistributorHistorys">
+        <PropertyRef Name="requestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Distributors_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Distributors" Type="Self.Distributor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Distributors">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FoodCollectRequestHistorys_Distributors">
+    <End Role="Distributors" Type="Self.Distributor" Multiplicity="0..1" />
+    <End Role="FoodCollectRequestHistorys" Type="Self.FoodCollectRequestHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Distributors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="FoodCollectRequestHistorys">
+        <PropertyRef Name="distributorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Processings_Distributors">
+    <End Role="Distributors" Type="Self.Distributor" Multiplicity="0..1" />
+    <End Role="Processings" Type="Self.Processing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Distributors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Processings">
+        <PropertyRef Name="distributorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FoodCollectRequestHistorys_FoodCollectRequests">
+    <End Role="FoodCollectRequests" Type="Self.FoodCollectRequest" Multiplicity="0..1" />
+    <End Role="FoodCollectRequestHistorys" Type="Self.FoodCollectRequestHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FoodCollectRequests">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="FoodCollectRequestHistorys">
+        <PropertyRef Name="requestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FoodCollectRequestHistorys_Restaurants">
+    <End Role="Restaurants" Type="Self.Restaurant" Multiplicity="0..1" />
+    <End Role="FoodCollectRequestHistorys" Type="Self.FoodCollectRequestHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurants">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="FoodCollectRequestHistorys">
+        <PropertyRef Name="restaurantID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FoodCollectRequests_Restaurants">
+    <End Role="Restaurants" Type="Self.Restaurant" Multiplicity="1" />
+    <End Role="FoodCollectRequests" Type="Self.FoodCollectRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurants">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="FoodCollectRequests">
+        <PropertyRef Name="retaurantID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Processings_FoodCollectRequests">
+    <End Role="FoodCollectRequests" Type="Self.FoodCollectRequest" Multiplicity="0..1" />
+    <End Role="Processings" Type="Self.Processing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FoodCollectRequests">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Processings">
+        <PropertyRef Name="requestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Restaurants_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Restaurants" Type="Self.Restaurant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Restaurants">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Roles">
+    <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="roleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ZeroHungerDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="CollectorHistorys" EntityType="Self.CollectorHistory" />
+    <EntitySet Name="Collectors" EntityType="Self.Collector" />
+    <EntitySet Name="DistributorHistorys" EntityType="Self.DistributorHistory" />
+    <EntitySet Name="Distributors" EntityType="Self.Distributor" />
+    <EntitySet Name="FoodCollectRequestHistorys" EntityType="Self.FoodCollectRequestHistory" />
+    <EntitySet Name="FoodCollectRequests" EntityType="Self.FoodCollectRequest" />
+    <EntitySet Name="Processings" EntityType="Self.Processing" />
+    <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Admins_Users" Association="Self.FK_Admins_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Admins" EntitySet="Admins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CollectorHistorys_Collectors" Association="Self.FK_CollectorHistorys_Collectors">
+      <End Role="Collectors" EntitySet="Collectors" />
+      <End Role="CollectorHistorys" EntitySet="CollectorHistorys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CollectorHistorys_Distributors" Association="Self.FK_CollectorHistorys_Distributors">
+      <End Role="Distributors" EntitySet="Distributors" />
+      <End Role="CollectorHistorys" EntitySet="CollectorHistorys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CollectorHistorys_FoodCollectRequests" Association="Self.FK_CollectorHistorys_FoodCollectRequests">
+      <End Role="FoodCollectRequests" EntitySet="FoodCollectRequests" />
+      <End Role="CollectorHistorys" EntitySet="CollectorHistorys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Collectors_Users" Association="Self.FK_Collectors_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Collectors" EntitySet="Collectors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DistributorHistorys_Collectors" Association="Self.FK_DistributorHistorys_Collectors">
+      <End Role="Collectors" EntitySet="Collectors" />
+      <End Role="DistributorHistorys" EntitySet="DistributorHistorys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FoodCollectRequestHistorys_Collectors" Association="Self.FK_FoodCollectRequestHistorys_Collectors">
+      <End Role="Collectors" EntitySet="Collectors" />
+      <End Role="FoodCollectRequestHistorys" EntitySet="FoodCollectRequestHistorys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Processings_Collectors" Association="Self.FK_Processings_Collectors">
+      <End Role="Collectors" EntitySet="Collectors" />
+      <End Role="Processings" EntitySet="Processings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DistributorHistorys_Distributors" Association="Self.FK_DistributorHistorys_Distributors">
+      <End Role="Distributors" EntitySet="Distributors" />
+      <End Role="DistributorHistorys" EntitySet="DistributorHistorys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DistributorHistorys_FoodCollectRequests" Association="Self.FK_DistributorHistorys_FoodCollectRequests">
+      <End Role="FoodCollectRequests" EntitySet="FoodCollectRequests" />
+      <End Role="DistributorHistorys" EntitySet="DistributorHistorys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Distributors_Users" Association="Self.FK_Distributors_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Distributors" EntitySet="Distributors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FoodCollectRequestHistorys_Distributors" Association="Self.FK_FoodCollectRequestHistorys_Distributors">
+      <End Role="Distributors" EntitySet="Distributors" />
+      <End Role="FoodCollectRequestHistorys" EntitySet="FoodCollectRequestHistorys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Processings_Distributors" Association="Self.FK_Processings_Distributors">
+      <End Role="Distributors" EntitySet="Distributors" />
+      <End Role="Processings" EntitySet="Processings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FoodCollectRequestHistorys_FoodCollectRequests" Association="Self.FK_FoodCollectRequestHistorys_FoodCollectRequests">
+      <End Role="FoodCollectRequests" EntitySet="FoodCollectRequests" />
+      <End Role="FoodCollectRequestHistorys" EntitySet="FoodCollectRequestHistorys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FoodCollectRequestHistorys_Restaurants" Association="Self.FK_FoodCollectRequestHistorys_Restaurants">
+      <End Role="Restaurants" EntitySet="Restaurants" />
+      <End Role="FoodCollectRequestHistorys" EntitySet="FoodCollectRequestHistorys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FoodCollectRequests_Restaurants" Association="Self.FK_FoodCollectRequests_Restaurants">
+      <End Role="Restaurants" EntitySet="Restaurants" />
+      <End Role="FoodCollectRequests" EntitySet="FoodCollectRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Processings_FoodCollectRequests" Association="Self.FK_Processings_FoodCollectRequests">
+      <End Role="FoodCollectRequests" EntitySet="FoodCollectRequests" />
+      <End Role="Processings" EntitySet="Processings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Restaurants_Users" Association="Self.FK_Restaurants_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Restaurants" EntitySet="Restaurants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "requestSpecificDecission";
+}
+
+<h2>Request Specific Decission</h2>
+
+<a href="/Admin/Index" class="btn btn-secondary">Back</a>
+<br />
+<br />
+@if (Model != null)
+{
+    <div>
+        @foreach (var foodCollectRequest in Model.FoodCollectRequests)
+        {
+            <div>
+                <table class="table table-bordered">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Restaurant Name</th>
+                            <th>Food Type</th>
+                            <th>Packaging Type</th>
+                            <th>Number of Packages</th>
+                            <th>Food Description</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>@Model.restaurantName</td>
+                        <td>@foodCollectRequest.foodType</td>
+                        <td>@foodCollectRequest.packagingType</td>
+                        <td>@foodCollectRequest.numberofPackages</td>
+                        <td>@foodCollectRequest.foodDescription</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <table class="table table-bordered">
+                    <thead class="table-danger">
+                        <tr>
+                            <th>Available Date</th>
+                            <th>Preferred Collect Time</th>
+                            <th>Expiry Date</th>
+                            <th>Pick-up Location</th>
+                            <th>Status Type</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>@foodCollectRequest.availableDate.ToString("yyyy-MM-dd")</td>
+                        <td>@foodCollectRequest.preferredCollectTime.ToString("h:mm tt")</td>
+                        <td>@foodCollectRequest.expiryDate.ToString("yyyy-MM-dd")</td>
+                        <td>@foodCollectRequest.pickUpLocation</td>
+                        <td>@foodCollectRequest.statusType</td>
+                    </tr>
+                </table>
+            </div>
+            <a href="/Admin/requestAccept/@foodCollectRequest.id" class="btn btn-info">Accept</a>
+            <a href="/Admin/requestCancel/@foodCollectRequest.id" class="btn btn-danger">Cancel</a><br />
+            <br />
+            <hr />
+        }
+    </div>
+}
+else
+{
+    <p>No food collect requests available.</p>
+}

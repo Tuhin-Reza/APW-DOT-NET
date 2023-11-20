@@ -1,0 +1,54 @@
+﻿@model List<ZeroHunger.DTOS.FoodCollectRequestDTO>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@ViewBag.name, Welcome to Zero Hunger</h2>
+<a href="/Admin/requestDecission" class="btn btn-warning">
+    Request Pending @if (ViewBag.requestCount != null)
+    {<span class="badge">@ViewBag.requestCount</span>}
+</a>
+
+<a href="/Admin/assignArea" class="btn btn-warning">
+    Distribute Pending Area @if (ViewBag.collectedcount != null)
+    {<span class="badge">@ViewBag.collectedcount</span>}
+</a>
+
+<a href="/Admin/assignCollector" class="btn btn-warning">Assign Collector</a>
+<a href="/Admin/assignDistributor" class="btn btn-warning">Assign Distributor</a>
+
+
+<h6>Food Collect Requests</h6>
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Request ID</th>
+                <th>Food Type</th>
+                <th>Expiry Date</th>
+                <th>Pick-up Location</th>
+                <th>Status Type</th>
+                <th>Check</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.foodType</td>
+                <td>@item.expiryDate.ToString("yyyy-MM-dd")</td>
+                <td>@item.pickUpLocation</td>
+                <td>@item.statusType</td>
+                <td>
+                    <a href="@Url.Action("requestSpecificDecission", "Admin", new { restaurant_id = item.retaurantID, fcr_id = item.id })" class="btn btn-secondary">Details</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>No food collect requests available.</p>
+}
+
