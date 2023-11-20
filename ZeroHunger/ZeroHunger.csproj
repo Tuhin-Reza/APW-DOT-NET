@@ -133,6 +133,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="AUTH\Logged.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CollectorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="DTOS\CollectorDTO.cs" />
@@ -277,6 +278,7 @@
     <Content Include="Views\Admin\requestCancel.cshtml" />
     <Content Include="Views\Admin\assignCollector.cshtml" />
     <Content Include="Views\Admin\assignDistributor.cshtml" />
+    <Content Include="Views\Collector\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

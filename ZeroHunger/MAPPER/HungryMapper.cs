@@ -189,8 +189,109 @@ namespace ZeroHunger.MAPPER
         }
 
 
+        public Collector DTOToCollector(CollectorDTO collector)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<CollectorDTO, Collector>();
+            });
+            var mapper = config.CreateMapper();
+            return new Collector()
+            {
+                id = collector.id,
+                name = collector.name,
+                contactNumber = collector.contactNumber,
+                email = collector.email,
+                vehicleType = collector.vehicleType,
+                userID = collector.userID
+            };
+        }
+        public CollectorDTO CollectorToDTO(Collector collector)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Collector, CollectorDTO>();
+            });
+            var mapper = config.CreateMapper();
+
+            return new CollectorDTO()
+            {
+                id = collector.id,
+                name = collector.name,
+                contactNumber = collector.contactNumber,
+                email = collector.email,
+                vehicleType = collector.vehicleType,
+                userID = collector.userID,
+            };
+        }
+        public User DTOToCollectorUser(CollectorDTO collectorDTO)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<CollectorDTO, User>();
+            });
+            var mapper = config.CreateMapper();
+            return new User()
+            {
+                username = collectorDTO.username,
+                password = collectorDTO.password
+            };
+        }
 
 
+        public Distributor DTOToDistributor(DistributorDTO distributor)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<DistributorDTO, Distributor>();
+            });
+
+            var mapper = config.CreateMapper();
+
+            return new Distributor()
+            {
+                id = distributor.id,
+                name = distributor.name,
+                contactNumber = distributor.contactNumber,
+                email = distributor.email,
+                area = distributor.area,
+                userID = distributor.userID,
+            };
+        }
+
+        public DistributorDTO DistributorToDTO(Distributor distributor)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Distributor, DistributorDTO>();
+            });
+
+            var mapper = config.CreateMapper();
+
+            return new DistributorDTO()
+            {
+                id = distributor.id,
+                name = distributor.name,
+                contactNumber = distributor.contactNumber,
+                email = distributor.email,
+                area = distributor.area,
+                userID = distributor.userID,
+            };
+        }
+
+        public User DTOToDistributorUser(DistributorDTO distributorDTO)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<DistributorDTO, User>();
+            });
+            var mapper = config.CreateMapper();
+            return new User()
+            {
+                username = distributorDTO.username,
+                password = distributorDTO.password
+            };
+        }
 
 
 

@@ -4,24 +4,24 @@
 }
 
 <h2>Assign Collector</h2>
-<a href="/Admin/Index" class="btn btn-secondary">Back</a>
+<a href="/Admin/Index" class="btn btn-secondary">Back</a><br /><br />
 <form action="/Admin/assignCollector" method="post">
     <div class="form-group">
         <label for="name">Name:</label>
         <input type="text" class="form-control" id="name" name="name" placeholder="Enter Full Name" value="@(Model == null ? "" : Model.name)">
-        <span class="text-danger">@Html.ValidationMessage("name")</span>
+        <span class="text-danger">@Html.ValidationMessage("name")</span><br />
     </div>
 
     <div class="form-group">
         <label for="contactNumber">Contact Number:</label>
         <input type="text" class="form-control" id="contactNumber" name="contactNumber" placeholder="Enter Contact Number" value="@(Model == null ? "" : Model.contactNumber)">
-        <span class="text-danger">@Html.ValidationMessage("contactNumber")</span>
+        <span class="text-danger">@Html.ValidationMessage("contactNumber")</span><br />
     </div>
 
     <div class="form-group">
         <label for="email">Email:</label>
         <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" value="@(Model == null ? "" : Model.email)">
-        <span class="text-danger">@Html.ValidationMessage("email")</span>
+        <span class="text-danger">@Html.ValidationMessage("email")</span><br />
     </div>
 
     <div class="form-group">
@@ -34,7 +34,7 @@
             <option value="PickUpTruck">PickUp Truck</option>
             <option value="RefrigeratedTruck">Refrigerated Truck</option>
         </select>
-        <span class="text-danger">@Html.ValidationMessage("vehicleType")</span>
+        <span class="text-danger">@Html.ValidationMessage("vehicleType")</span><br />
     </div>
 
 
@@ -49,6 +49,12 @@
         <input type="password" class="form-control" id="password" name="password" value="@(Model==null ? "":Model.password)" placeholder="Enter password">
         <span class="text-danger">@Html.ValidationMessage("password")</span><br />
     </div>
+    @if (TempData["collectorExists"] != null)
+    {
+        <div class="alert alert-danger  col-sm-3">
+            @TempData["collectorExists"]
+        </div>
+    }<br/>
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

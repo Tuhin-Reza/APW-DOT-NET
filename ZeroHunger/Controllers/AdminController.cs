@@ -152,11 +152,39 @@ namespace ZeroHunger.Controllers
         {
             if (ModelState.IsValid)
             {
+                var collectorUser = mapper.DTOToCollectorUser(data);
+                var collRoleID = (from role in db.Roles
+                                  where role.type == "Collector"
+                                  select role.id).SingleOrDefault();
+                if (collRoleID != 0)
+                {
+                    var check = (from user in db.Users
+                                 where user.username == data.username && user.password == data.password
+                                 select user).SingleOrDefault();
+                    if (check == null)
+                    {
+                        collectorUser.roleID = collRoleID;
+                        db.Users.Add(collectorUser);
+                        db.SaveChanges();
 
+                        var userid = (from user in db.Users
+                                      where user.username == collectorUser.username && user.password == collectorUser.password
+                                      select user.id).SingleOrDefault();
+
+                        var collectorData = mapper.DTOToCollector(data);
+                        collectorData.userID = userid;
+                        db.Collectors.Add(collectorData);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        TempData["collectorExists"] = "Provide Unique Username & Password";
+                        return View(data);
+                    }
+                }
             }
-            return View();
+            return View(data);
         }
-
 
 
         [HttpGet]
@@ -170,9 +198,38 @@ namespace ZeroHunger.Controllers
         {
             if (ModelState.IsValid)
             {
+                var distributorUser = mapper.DTOToDistributorUser(data);
+                var distRoleID = (from role in db.Roles
+                                  where role.type == "Distributor"
+                                  select role.id).SingleOrDefault();
+                if (distRoleID != 0)
+                {
+                    var check = (from user in db.Users
+                                 where user.username == distributorUser.username && user.password == distributorUser.password
+                                 select user).SingleOrDefault();
+                    if (check == null)
+                    {
+                        distributorUser.roleID = distRoleID;
+                        db.Users.Add(distributorUser);
+                        db.SaveChanges();
 
+                        var userId = (from user in db.Users
+                                      where user.username == distributorUser.username && user.password == distributorUser.password
+                                      select user.id).SingleOrDefault();
+
+                        var distributorData = mapper.DTOToDistributor(data);
+                        distributorData.userID = userId;
+                        db.Distributors.Add(distributorData);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        TempData["DistributorExists"] = "Provide Unique Username & Password";
+                        return View(data);
+                    }
+                }
             }
-            return View();
+            return View(data);
         }
 
 
