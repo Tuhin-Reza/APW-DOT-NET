@@ -166,6 +166,8 @@ namespace ZeroHunger.MAPPER
         }
 
 
+
+
         public RestaurantFoodCollectRequestDTO RestaurantFoodCollectRequestToDTO(Restaurant restaurant, int id)
         {
             var config = new MapperConfiguration(cfg =>
@@ -293,8 +295,52 @@ namespace ZeroHunger.MAPPER
             };
         }
 
+        //----------------------Collect Pending -----------------------------------------------
+        public List<RestaurantFoodCollectRequestDTO> RestaurantFoodCollectRequestCollectorListDTO(List<Restaurant> restaurants)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<FoodCollectRequest, FoodCollectRequestDTO>();
+                cfg.CreateMap<Restaurant, RestaurantFoodCollectRequestDTO>();
+            });
+
+            var mapper = config.CreateMapper();
+
+            var result = (from r in restaurants
+                          select new RestaurantFoodCollectRequestDTO
+                          {
+                              restaurantName = r.restaurantName,
+                              FoodCollectRequests = (from fcr in r.FoodCollectRequests
+                                                     where fcr.statusType == "Collector Comming Soon"
+                                                     orderby fcr.expiryDate ascending
+                                                     select mapper.Map<FoodCollectRequestDTO>(fcr)).ToList()
+                          }).ToList();
+            return result;
+        }
 
 
+        //----------------------Distributor Area -----------------------------------------------
+        public List<FoodCollectRequestProcessingDTO> FoodCollectRequestProcessingListDTO(List<Restaurant> restaurants)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<FoodCollectRequest, FoodCollectRequestDTO>();
+                cfg.CreateMap<Restaurant, RestaurantFoodCollectRequestDTO>();
+            });
+
+            var mapper = config.CreateMapper();
+
+            var result = (from r in restaurants
+                          select new RestaurantFoodCollectRequestDTO
+                          {
+                              restaurantName = r.restaurantName,
+                              FoodCollectRequests = (from fcr in r.FoodCollectRequests
+                                                     where fcr.statusType == "Request Pending"
+                                                     orderby fcr.expiryDate ascending
+                                                     select mapper.Map<FoodCollectRequestDTO>(fcr)).ToList()
+                          }).ToList();
+            return result;
+        }
 
     }
 }

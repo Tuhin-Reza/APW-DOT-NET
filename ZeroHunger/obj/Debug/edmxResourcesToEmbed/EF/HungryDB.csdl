@@ -130,6 +130,7 @@
     <Property Name="requestID" Type="Int32" />
     <Property Name="collectorID" Type="Int32" />
     <Property Name="distributorID" Type="Int32" />
+    <Property Name="area" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Collector" Relationship="Self.FK_Processings_Collectors" FromRole="Processings" ToRole="Collectors" />
     <NavigationProperty Name="Distributor" Relationship="Self.FK_Processings_Distributors" FromRole="Processings" ToRole="Distributors" />
     <NavigationProperty Name="FoodCollectRequest" Relationship="Self.FK_Processings_FoodCollectRequests" FromRole="Processings" ToRole="FoodCollectRequests" />

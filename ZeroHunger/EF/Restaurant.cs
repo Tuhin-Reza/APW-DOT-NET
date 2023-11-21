@@ -28,7 +28,7 @@ namespace ZeroHunger.EF
         public string contactPersonNumber { get; set; }
         public string contactPersonDesignation { get; set; }
         public string restaurantType { get; set; }
-        public  string email { get; set; }
+        public string email { get; set; }
         public int userID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

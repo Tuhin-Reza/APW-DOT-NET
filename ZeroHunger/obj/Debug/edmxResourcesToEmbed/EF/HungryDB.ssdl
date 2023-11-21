@@ -104,6 +104,7 @@
     <Property Name="requestID" Type="int" />
     <Property Name="collectorID" Type="int" />
     <Property Name="distributorID" Type="int" />
+    <Property Name="area" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Restaurants">
     <Key>

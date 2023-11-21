@@ -139,8 +139,9 @@ namespace ZeroHunger.Controllers
                             else
                             {
                                 var distributorEntity = (from u in db.Users
-                                                         where u.roleID == userDistributor.role.id
+                                                         where u.username == userDistributor.user.username && u.password == userDistributor.user.password && u.roleID == userDistributor.role.id
                                                          select u).SingleOrDefault();
+
                                 Session["userData"] = mapper.UserToDTO(distributorEntity);
                                 return RedirectToAction("Index", "Distributor");
                             }
@@ -148,7 +149,7 @@ namespace ZeroHunger.Controllers
                         else
                         {
                             var collectorEntity = (from u in db.Users
-                                                   where u.roleID == userCollector.role.id
+                                                   where u.username == userCollector.user.username && u.password == userCollector.user.password && u.roleID == userCollector.role.id
                                                    select u).SingleOrDefault();
                             Session["userData"] = mapper.UserToDTO(collectorEntity);
                             return RedirectToAction("Index", "Collector");

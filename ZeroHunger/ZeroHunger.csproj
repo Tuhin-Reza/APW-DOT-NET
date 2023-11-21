@@ -134,11 +134,15 @@
     <Compile Include="AUTH\Logged.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CollectorController.cs" />
+    <Compile Include="Controllers\DistributorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
+    <Compile Include="DTOS\assignAreaDTO.cs" />
     <Compile Include="DTOS\CollectorDTO.cs" />
     <Compile Include="DTOS\DistributorDTO.cs" />
+    <Compile Include="DTOS\FCRHistoryDTO.cs" />
     <Compile Include="DTOS\FoodCollectRequestDTO.cs" />
+    <Compile Include="DTOS\FoodCollectRequestFCRHistoryDTO.cs" />
     <Compile Include="DTOS\ReasonDTO.cs" />
     <Compile Include="DTOS\RestaurantDTO.cs" />
     <Compile Include="DTOS\RestaurantFoodCollectRequestListDTO.cs" />
@@ -219,8 +223,8 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="EF\HungryDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>HungryDB.Context.cs</LastGenOutput>
       <DependentUpon>HungryDB.edmx</DependentUpon>
+      <LastGenOutput>HungryDB.Context.cs</LastGenOutput>
     </Content>
     <Content Include="EF\HungryDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -279,6 +283,10 @@
     <Content Include="Views\Admin\assignCollector.cshtml" />
     <Content Include="Views\Admin\assignDistributor.cshtml" />
     <Content Include="Views\Collector\Index.cshtml" />
+    <Content Include="Views\Collector\detailsFoodRequest.cshtml" />
+    <Content Include="Views\Collector\collectPending.cshtml" />
+    <Content Include="Views\Admin\assignArea.cshtml" />
+    <Content Include="Views\Distributor\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

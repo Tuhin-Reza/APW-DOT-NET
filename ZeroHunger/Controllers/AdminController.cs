@@ -28,7 +28,7 @@ namespace ZeroHunger.Controllers
                                 select d).Count();
             ViewBag.requestCount = requestcount;
 
-            int collectedcount = (from d in db.FoodCollectRequests
+            var collectedcount = (from d in db.FoodCollectRequests
                                   where d.statusType == "Food Collected"
                                   select d).Count();
             ViewBag.collectedcount = collectedcount;
@@ -36,7 +36,7 @@ namespace ZeroHunger.Controllers
 
 
             var foodCollectRequestlist = (from d in db.FoodCollectRequests
-                                          where d.statusType != "Date Expired" && d.statusType != "Completed" && d.statusType != "Cancel"
+                                          where d.statusType == "Request Pending"
                                           orderby d.expiryDate ascending
                                           select d).ToList();
             var foodCollectRequestDTOlist = mapper.FoodCollectRequestListToDTO(foodCollectRequestlist);
@@ -76,8 +76,6 @@ namespace ZeroHunger.Controllers
                     {
                         requestStatus = "Accept",
                         collectReason = "Hungry",
-                        collectDate = DateTime.Today,
-                        collectTime = DateTime.Now,
                         requestID = foodCollectRequest.id,
                         restaurantID = foodCollectRequest.retaurantID,
 
@@ -230,6 +228,49 @@ namespace ZeroHunger.Controllers
                 }
             }
             return View(data);
+        }
+
+        public ActionResult assignArea()
+        {
+            var fcr = (from d in db.FoodCollectRequests
+                       where d.statusType == "Food Collected"
+                       select d).ToList();
+            var fcrDTO = mapper.FoodCollectRequestListToDTO(fcr);
+            return View(fcrDTO);
+        }
+
+        [HttpPost]
+        public ActionResult assignArea(assignAreaDTO data)
+        {
+            if (ModelState.IsValid)
+            {
+                if (data.id != 0)
+                {
+                    var processingData = (from p in db.Processings
+                                          where p.requestID == data.id
+                                          select p).SingleOrDefault();
+
+                    processingData.area = data.area;
+                    db.SaveChanges();
+
+                    var foodCollectRequest = (from d in db.FoodCollectRequests
+                                              where d.id == data.id
+                                              select d).SingleOrDefault();
+                    foodCollectRequest.statusType = "Distributor Finding";
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                var fcr = (from d in db.FoodCollectRequests
+                           where d.statusType == "Food Collected"
+                           select d).ToList();
+                var fcrDTO = mapper.FoodCollectRequestListToDTO(fcr);
+                return View(fcrDTO);
+            }
+
+            return RedirectToAction("Index");
         }
 
 

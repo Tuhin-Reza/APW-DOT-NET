@@ -4,19 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7e9f61dec7f4425795277f4ef2fd2025" Name="Diagram1">
-        <EntityTypeShape EntityType="ZeroHungerDBModel.Admin" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeroHungerDBModel.CollectorHistory" Width="1.5" PointX="9.75" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeroHungerDBModel.Collector" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeroHungerDBModel.DistributorHistory" Width="1.5" PointX="12.75" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeroHungerDBModel.Distributor" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
+      <Diagram DiagramId="7eb0e866c1044fbbab6ee366b6464e31" Name="Diagram1">
+        <EntityTypeShape EntityType="ZeroHungerDBModel.Admin" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeroHungerDBModel.CollectorHistory" Width="1.5" PointX="9.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeroHungerDBModel.Collector" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeroHungerDBModel.DistributorHistory" Width="1.5" PointX="12.75" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeroHungerDBModel.Distributor" Width="1.5" PointX="5.25" PointY="15.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ZeroHungerDBModel.FoodCollectRequestHistory" Width="1.5" PointX="9.75" PointY="20.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeroHungerDBModel.FoodCollectRequest" Width="1.5" PointX="7.5" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeroHungerDBModel.FoodCollectRequest" Width="1.5" PointX="7.5" PointY="19.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ZeroHungerDBModel.Processing" Width="1.5" PointX="9.75" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeroHungerDBModel.Restaurant" Width="1.5" PointX="5.25" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeroHungerDBModel.Restaurant" Width="1.5" PointX="5.25" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ZeroHungerDBModel.Role" Width="1.5" PointX="0.75" PointY="15.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ZeroHungerDBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZeroHungerDBModel.User" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZeroHungerDBModel.User" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
         <AssociationConnector Association="ZeroHungerDBModel.FK_Admins_Users" ManuallyRouted="false" />
         <AssociationConnector Association="ZeroHungerDBModel.FK_CollectorHistorys_Collectors" ManuallyRouted="false" />
         <AssociationConnector Association="ZeroHungerDBModel.FK_CollectorHistorys_Distributors" ManuallyRouted="false" />

@@ -111,6 +111,7 @@
           <ScalarProperty Name="requestID" ColumnName="requestID" />
           <ScalarProperty Name="collectorID" ColumnName="collectorID" />
           <ScalarProperty Name="distributorID" ColumnName="distributorID" />
+          <ScalarProperty Name="area" ColumnName="area" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

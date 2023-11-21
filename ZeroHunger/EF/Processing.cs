@@ -18,6 +18,7 @@ namespace ZeroHunger.EF
         public Nullable<int> requestID { get; set; }
         public Nullable<int> collectorID { get; set; }
         public Nullable<int> distributorID { get; set; }
+        public string area { get; set; }
     
         public virtual Collector Collector { get; set; }
         public virtual Distributor Distributor { get; set; }

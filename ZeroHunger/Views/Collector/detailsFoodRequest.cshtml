@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "detailsFoodRequest";
+}
+
+<h2>Details Food Request</h2>
+
+
+<a href="/Collector/Index" class="btn btn-secondary">Back</a>
+<br />
+<br />
+@if (Model != null)
+{
+    <div>
+        @foreach (var foodCollectRequest in Model.FoodCollectRequests)
+        {
+            <div>
+                <table class="table table-bordered">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Restaurant Name</th>
+                            <th>Packaging Type</th>
+                            <th>Number of Packages</th>
+                            <th>Food Description</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>@Model.restaurantName</td>
+                        <td>@foodCollectRequest.packagingType</td>
+                        <td>@foodCollectRequest.numberofPackages</td>
+                        <td>@foodCollectRequest.foodDescription</td>
+                    </tr>
+                </table>
+            </div>
+            <a href="/Collector/acceptRequest/@foodCollectRequest.id" class="btn btn-info">Collect</a>
+            <br />
+            <hr />
+        }
+    </div>
+}
+else
+{
+    <p>No food collect requests available.</p>
+}
+
