@@ -253,6 +253,12 @@ namespace ZeroHunger.Controllers
                     processingData.area = data.area;
                     db.SaveChanges();
 
+                    var collectorHistory = (from ch in db.CollectorHistorys
+                                            where ch.requestID == data.id
+                                            select ch).SingleOrDefault();
+                    collectorHistory.deliveryLocation = data.area;
+                    db.SaveChanges();
+
                     var foodCollectRequest = (from d in db.FoodCollectRequests
                                               where d.id == data.id
                                               select d).SingleOrDefault();

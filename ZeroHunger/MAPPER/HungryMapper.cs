@@ -320,27 +320,17 @@ namespace ZeroHunger.MAPPER
 
 
         //----------------------Distributor Area -----------------------------------------------
-        public List<FoodCollectRequestProcessingDTO> FoodCollectRequestProcessingListDTO(List<Restaurant> restaurants)
+        public List<FoodCollectRequestProcessingDTO> FoodCollectRequestProcessingListDTO(List<FoodCollectRequest> foodCollectRequests)
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<FoodCollectRequest, FoodCollectRequestDTO>();
-                cfg.CreateMap<Restaurant, RestaurantFoodCollectRequestDTO>();
+                cfg.CreateMap<Processing, ProcessingDTO>();
+                cfg.CreateMap<FoodCollectRequest, FoodCollectRequestProcessingDTO>();
             });
-
             var mapper = config.CreateMapper();
-
-            var result = (from r in restaurants
-                          select new RestaurantFoodCollectRequestDTO
-                          {
-                              restaurantName = r.restaurantName,
-                              FoodCollectRequests = (from fcr in r.FoodCollectRequests
-                                                     where fcr.statusType == "Request Pending"
-                                                     orderby fcr.expiryDate ascending
-                                                     select mapper.Map<FoodCollectRequestDTO>(fcr)).ToList()
-                          }).ToList();
-            return result;
+            return mapper.Map<List<FoodCollectRequestProcessingDTO>>(foodCollectRequests);
         }
+
 
     }
 }

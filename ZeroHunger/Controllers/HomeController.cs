@@ -178,5 +178,12 @@ namespace ZeroHunger.Controllers
             return View(data);
         }
 
+        public ActionResult Signout()
+        {
+            Session.RemoveAll();
+            Session.Clear();
+            return RedirectToAction("Signin");
+        }
+
     }
 }

@@ -14,5 +14,15 @@ namespace ZeroHunger.AUTH
 
             return false;
         }
+
+        protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        {
+
+            filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary
+            {
+                { "controller", "Home" },
+                { "action", "Signin" }
+            });
+        }
     }
 }

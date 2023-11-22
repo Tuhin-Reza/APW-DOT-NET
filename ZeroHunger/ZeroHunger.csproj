@@ -139,10 +139,14 @@
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="DTOS\assignAreaDTO.cs" />
     <Compile Include="DTOS\CollectorDTO.cs" />
+    <Compile Include="DTOS\DistributionCompleteDTO.cs" />
     <Compile Include="DTOS\DistributorDTO.cs" />
+    <Compile Include="DTOS\DistributionCancelDTO.cs" />
     <Compile Include="DTOS\FCRHistoryDTO.cs" />
     <Compile Include="DTOS\FoodCollectRequestDTO.cs" />
     <Compile Include="DTOS\FoodCollectRequestFCRHistoryDTO.cs" />
+    <Compile Include="DTOS\FoodCollectRequestProcessingDTO.cs" />
+    <Compile Include="DTOS\ProcessingDTO.cs" />
     <Compile Include="DTOS\ReasonDTO.cs" />
     <Compile Include="DTOS\RestaurantDTO.cs" />
     <Compile Include="DTOS\RestaurantFoodCollectRequestListDTO.cs" />
@@ -287,6 +291,12 @@
     <Content Include="Views\Collector\collectPending.cshtml" />
     <Content Include="Views\Admin\assignArea.cshtml" />
     <Content Include="Views\Distributor\Index.cshtml" />
+    <Content Include="Views\Distributor\error.cshtml" />
+    <Content Include="Views\Distributor\receivedFood.cshtml" />
+    <Content Include="Views\Distributor\distribute.cshtml" />
+    <Content Include="Views\Distributor\complete.cshtml" />
+    <Content Include="Views\Distributor\distributecomplete.cshtml" />
+    <Content Include="Views\Distributor\distributionCancel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

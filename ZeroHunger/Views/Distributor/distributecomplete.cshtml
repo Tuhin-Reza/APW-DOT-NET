@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "distributecomplete";
+}
+
+<a href="/Distributor/distribute" class="btn btn-secondary">Back</a><br /><br />
+<h2>Distribute Complete Form</h2>
+<hr />
+<form action="/Distributor/distributecomplete" method="post">
+    <input type="hidden" name="id" value="@ViewBag.id" />
+    <div class="form-group">
+        <label for="receiverType">Receiver Type:</label>
+        <select class="form-control" id="receiverType" name="receiverType">
+            <option disabled selected>---Select Receiver Type---</option>
+            <option value="Street People">Street People</option>
+            <option value="Street Family">Street Family</option>
+            <option value="Charities">Charities</option>
+            <option value="Share with Neighbors">Share with Neighbors</option>
+        </select>
+        <span class="text-danger">@Html.ValidationMessage("receiverType")</span><br />
+    </div>
+
+    <div class="form-group">
+        <label for="numberofReceiver">Number of Receiver:</label>
+        <input type="number" class="form-control" id="numberofReceiver" name="numberofReceiver" value="@(Model == null ? 0 : Model.numberofReceiver)" min="0">
+        <span class="text-danger">@Html.ValidationMessage("numberofReceiver")</span><br />
+    </div>
+    <button type="submit" class="btn btn-primary ">Submit</button>
+</form>
+

@@ -1,23 +1,12 @@
-﻿@model List<ZeroHunger.DTOS.FoodCollectRequestProcessingDTO>
+﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "receivedFood";
 }
-
-
-<h2>@ViewBag.DistName, Welcome to Zero Hunger</h2>
+<a href="/Distributor/Index" class="btn btn-secondary">Back</a>
+<br />
+<br />
+<h2>Received Food</h2>
 <hr />
-<a href="/Distributor/receivedFood" class="btn btn-warning">
-    Waiting For Food Collection @if (ViewBag.CountTransit != null)
-    {<span class="badge">@ViewBag.CountTransit</span>}
-</a>
-
-<a href="/Distributor/distribute" class="btn btn-warning">
-    Waiting For Distribution @if (ViewBag.countProcessing != null)
-    {<span class="badge">@ViewBag.countProcessing</span>}
-</a>
-<a href="/Home/Signout" class="btn btn-info">Signout</a><br /><br />
-<h5>Food Distribute Request</h5>
-<hr/>
 @if (Model != null && Model.Count > 0)
 {
     foreach (var foodCollectRequest in Model)
@@ -28,6 +17,7 @@
                 <table class="table table-bordered">
                     <thead class="table-success">
                         <tr>
+                            <th>Request ID</th>
                             <th>Packaging Type</th>
                             <th>Number of Packages</th>
                             <th>Food Description</th>
@@ -37,20 +27,21 @@
                         </tr>
                     </thead>
                     <tr>
+                        <td>@foodCollectRequest.id</td>
                         <td>@foodCollectRequest.packagingType</td>
                         <td>@foodCollectRequest.numberofPackages</td>
                         <td>@foodCollectRequest.foodDescription</td>
                         <td>@foodCollectRequest.statusType</td>
                         <td>@processing.area</td>
-                        <td><a href="/Distributor/distributionrequestaccept/@foodCollectRequest.id" class="btn btn-info">Accept</a></td>
+                        <td><a href="/Distributor/collectFood/@foodCollectRequest.id" class="btn btn-info">Collect</a></td>
                     </tr>
                 </table>
             </div>
         }
-
     }
 }
 else
 {
-    <span class="text-danger">Request Not Available</span>
+    <span class="text-danger">Food Not Available this Time</span>
 }
+

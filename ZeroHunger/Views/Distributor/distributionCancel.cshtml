@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "distributionCancel";
+}
+<a href="/Distributor/distribute" class="btn btn-secondary">Back</a><br /><br />
+<h2>Distribution Cancel Form</h2>
+<hr />
+<form action="/Distributor/distributionCancel" method="post">
+    <input type="hidden" name="id" value="@TempData["id"]" />
+    <div class="form-group">
+        <label for="distributereason">Distribute Reason:</label>
+        <select class="form-control" name="distributereason">
+            <option disabled selected>---Select Cancel Reason---</option>
+            <option value="Damaged Food">Damaged Food</option>
+            <option value="Transportation Issues">Transportation Issues</option>
+            <option value="Safety Concerns">Safety Concerns</option>
+        </select>
+        <span class="text-danger">@Html.ValidationMessage("distributereason")</span><br />
+    </div>
+    <button type="submit" class="btn btn-primary ">Submit</button>
+</form>
+
