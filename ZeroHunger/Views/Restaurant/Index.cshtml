@@ -5,13 +5,14 @@
 }
 
 <h2>Welcome, @ViewBag.contactPersonName</h2>
-
 <a href="/Restaurant/CreateFoodCollectRequest" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Collect Food Request</a>
+<a href="/Home/Signout" class="btn btn-info">Signout</a><br /><br />
+<hr />
 <main>
     <h6>Food Collect Requests</h6>
     @if (Model != null && Model.Count > 0)
     {
-        <table  class="table table-bordered">
+        <table class="table table-bordered">
             <tr>
                 <th>ID</th>
                 <th>Food Type</th>

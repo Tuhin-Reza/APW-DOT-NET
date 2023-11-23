@@ -137,14 +137,22 @@
     <Compile Include="Controllers\DistributorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
+    <Compile Include="CustomValidation\assignCollectorValidation.cs" />
+    <Compile Include="CustomValidation\assignDistributorValidation.cs" />
+    <Compile Include="CustomValidation\CollectRequestValidation.cs" />
+    <Compile Include="CustomValidation\RestaurantValidation.cs" />
     <Compile Include="DTOS\assignAreaDTO.cs" />
     <Compile Include="DTOS\CollectorDTO.cs" />
+    <Compile Include="DTOS\CollectorHistoryDTO.cs" />
     <Compile Include="DTOS\DistributionCompleteDTO.cs" />
     <Compile Include="DTOS\DistributorDTO.cs" />
     <Compile Include="DTOS\DistributionCancelDTO.cs" />
+    <Compile Include="DTOS\DistributorHistoryDTO.cs" />
+    <Compile Include="DTOS\DToCDFCHistoryDTO.cs" />
     <Compile Include="DTOS\FCRHistoryDTO.cs" />
     <Compile Include="DTOS\FoodCollectRequestDTO.cs" />
     <Compile Include="DTOS\FoodCollectRequestFCRHistoryDTO.cs" />
+    <Compile Include="DTOS\FoodCollectRequestHistoryDTO.cs" />
     <Compile Include="DTOS\FoodCollectRequestProcessingDTO.cs" />
     <Compile Include="DTOS\ProcessingDTO.cs" />
     <Compile Include="DTOS\ReasonDTO.cs" />
@@ -297,6 +305,11 @@
     <Content Include="Views\Distributor\complete.cshtml" />
     <Content Include="Views\Distributor\distributecomplete.cshtml" />
     <Content Include="Views\Distributor\distributionCancel.cshtml" />
+    <Content Include="Views\Distributor\distributorHistory.cshtml" />
+    <Content Include="Views\Admin\detailsCD.cshtml" />
+    <Content Include="Views\Admin\distributorDetails.cshtml" />
+    <Content Include="Views\Admin\collectorDetails.cshtml" />
+    <Content Include="Views\Admin\foodDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

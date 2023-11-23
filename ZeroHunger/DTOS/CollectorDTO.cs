@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ZeroHunger.CustomValidation;
+using static ZeroHunger.CustomValidation.assignCollectorValidation;
 
 namespace ZeroHunger.DTOS
 {
@@ -6,24 +7,23 @@ namespace ZeroHunger.DTOS
     {
         public int id { get; set; }
 
-        [Required]
+        [NameValidation]
         public string name { get; set; }
 
-        [Required]
+        [ContactNumberValidation]
         public string contactNumber { get; set; }
 
-        [Required]
+        [EmailValidation]
         public string email { get; set; }
 
-        [Required]
+        [VehicleTypeValidation]
         public string vehicleType { get; set; }
 
-        [Required]
+        [UsernameValidation]
         public string username { get; set; }
 
-        [Required]
+        [PasswordValidation]
         public string password { get; set; }
-
         public int userID { get; set; }
     }
 }

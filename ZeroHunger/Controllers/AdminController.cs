@@ -19,6 +19,7 @@ namespace ZeroHunger.Controllers
         }
         // GET: Admin
         [Logged]
+        [Logged]
         public ActionResult Index()
         {
             ViewBag.name = sessionUser.username;
@@ -44,6 +45,7 @@ namespace ZeroHunger.Controllers
         }
 
 
+        [Logged]
         public ActionResult requestDecission()
         {
             var data = db.Restaurants.ToList();
@@ -52,6 +54,7 @@ namespace ZeroHunger.Controllers
         }
 
 
+        [Logged]
         public ActionResult requestSpecificDecission(int restaurant_id, int fcr_id)
         {
             var data = db.Restaurants.Find(restaurant_id);
@@ -60,6 +63,7 @@ namespace ZeroHunger.Controllers
         }
 
 
+        [Logged]
         public ActionResult requestAccept(int id)
         {
             if (id != 0)
@@ -94,12 +98,14 @@ namespace ZeroHunger.Controllers
         }
 
 
+        [Logged]
         [HttpGet]
         public ActionResult requestCancel(int id)
         {
             return View(id);
         }
 
+        [Logged]
         [HttpPost]
         public ActionResult requestCancel(ReasonDTO data)
         {
@@ -139,6 +145,7 @@ namespace ZeroHunger.Controllers
         }
 
 
+
         [HttpGet]
         public ActionResult assignCollector()
         {
@@ -173,6 +180,8 @@ namespace ZeroHunger.Controllers
                         collectorData.userID = userid;
                         db.Collectors.Add(collectorData);
                         db.SaveChanges();
+
+                        return RedirectToAction("Index");
                     }
                     else
                     {
@@ -190,6 +199,7 @@ namespace ZeroHunger.Controllers
         {
             return View();
         }
+
 
         [HttpPost]
         public ActionResult assignDistributor(DistributorDTO data)
@@ -230,6 +240,7 @@ namespace ZeroHunger.Controllers
             return View(data);
         }
 
+        [Logged]
         public ActionResult assignArea()
         {
             var fcr = (from d in db.FoodCollectRequests
@@ -239,6 +250,7 @@ namespace ZeroHunger.Controllers
             return View(fcrDTO);
         }
 
+        [Logged]
         [HttpPost]
         public ActionResult assignArea(assignAreaDTO data)
         {
@@ -278,6 +290,57 @@ namespace ZeroHunger.Controllers
 
             return RedirectToAction("Index");
         }
+
+
+        [Logged]
+        public ActionResult detailsCD()
+        {
+            var distributor = db.Distributors.ToList();
+            var distHistory = mapper.DToCDFCHistoryAdminDTO(distributor);
+            return View(distHistory);
+        }
+
+        [Logged]
+        public ActionResult distributorDetails(int id)
+        {
+            var distributor = (from d in db.Distributors
+                               where d.id == id
+                               select d).SingleOrDefault();
+            var distributorDTO = mapper.DistributorToDTO(distributor);
+            return View(distributorDTO);
+        }
+
+
+        [Logged]
+        public ActionResult collectorDetails(int id)
+        {
+            var collector = (from c in db.Collectors
+                             where c.id == id
+                             select c).SingleOrDefault();
+            var collectorDTO = mapper.CollectorToDTO(collector);
+            return View(collector);
+        }
+
+        [Logged]
+        public ActionResult foodDetails(int restaurantID, int requestID)
+        {
+            var restaurantDetails = (from c in db.Restaurants
+                                     where c.id == restaurantID
+                                     select c).SingleOrDefault();
+
+            var requestDetails = (from fcr in db.FoodCollectRequests
+                                  where fcr.id == requestID
+                                  select fcr).SingleOrDefault();
+
+            var restaurantDetailsDTO = mapper.RestaurantToDTO(restaurantDetails);
+            var requestDetailsDTO = mapper.FoodCollectRequestToDTO(requestDetails);
+
+            ViewBag.request = requestDetailsDTO;
+            ViewBag.restaurant = restaurantDetailsDTO;
+            return View(requestDetailsDTO);
+        }
+
+
 
 
 

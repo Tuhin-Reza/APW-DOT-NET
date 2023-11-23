@@ -128,7 +128,21 @@ namespace ZeroHunger.MAPPER
             });
 
             var mapper = config.CreateMapper();
-            return mapper.Map<FoodCollectRequestDTO>(foodCollectRequest);
+            //return mapper.Map<FoodCollectRequestDTO>(foodCollectRequest);
+            return new FoodCollectRequestDTO()
+            {
+                id = foodCollectRequest.id,
+                foodType = foodCollectRequest.foodType,
+                packagingType = foodCollectRequest.packagingType,
+                numberofPackages = foodCollectRequest.numberofPackages,
+                foodDescription = foodCollectRequest.foodDescription,
+                availableDate = foodCollectRequest.availableDate,
+                preferredCollectTime = foodCollectRequest.preferredCollectTime,
+                expiryDate = foodCollectRequest.expiryDate,
+                pickUpLocation = foodCollectRequest.pickUpLocation,
+                statusType = foodCollectRequest.statusType
+
+            };
         }
 
         public FoodCollectRequest DTOToFoodCollectRequest(FoodCollectRequestDTO foodCollectRequestDTO)
@@ -330,6 +344,115 @@ namespace ZeroHunger.MAPPER
             var mapper = config.CreateMapper();
             return mapper.Map<List<FoodCollectRequestProcessingDTO>>(foodCollectRequests);
         }
+
+
+
+        //public List<DToCDFCHistoryDTO> DToCDFCHistoryListDTO(List<Distributor> distributor)
+        //{
+        //    var config = new MapperConfiguration(cfg =>
+        //    {
+        //        cfg.CreateMap<DistributorHistory, DistributorHistoryDTO>();
+        //        cfg.CreateMap<Distributor, DToCDFCHistoryDTO>();
+        //    });
+        //    var mapper = config.CreateMapper();
+        //    return mapper.Map<List<DToCDFCHistoryDTO>>(distributor);
+        //}
+
+        //public List<DToCDFCHistoryDTO> DToCDFCHistoryListDTO(List<Distributor> distributors)
+        //{
+        //    var config = new MapperConfiguration(cfg =>
+        //    {
+        //        cfg.CreateMap<DistributorHistory, DistributorHistoryDTO>();
+        //        cfg.CreateMap<Distributor, DToCDFCHistoryDTO>()
+        //        .ForMember(dest => dest.DistributorHistories, opt => opt.MapFrom(src => src.DistributorHistorys));
+        //    });
+
+        //    var mapper = config.CreateMapper();
+        //    return mapper.Map<List<DToCDFCHistoryDTO>>(distributors);
+        //}
+
+        //public List<DToCDFCHistoryDTO> DToCDFCHistoryListDTO(List<Distributor> distributors)
+        //{
+        //    var config = new MapperConfiguration(cfg =>
+        //    {
+        //        cfg.CreateMap<DistributorHistory, DistributorHistoryDTO>();
+        //        cfg.CreateMap<Distributor, DToCDFCHistoryDTO>();
+        //    });
+
+        //    var mapper = config.CreateMapper();
+
+        //    var result = (from d in distributors
+        //                  select new DToCDFCHistoryDTO
+        //                  {
+        //                      name = d.name,
+        //                      DistributorHistories = (from dh in d.DistributorHistorys
+        //                                              where d.id == dh.distributorID
+        //                                              orderby dh.distributorID ascending
+        //                                              select mapper.Map<DistributorHistoryDTO>(dh)).ToList()
+        //                  }).ToList();
+
+        //    return result;
+        //}
+
+
+        public List<DToCDFCHistoryDTO> DToCDFCHistoryAdminDTO(List<Distributor> distributors)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<DistributorHistory, DistributorHistoryDTO>();
+                cfg.CreateMap<CollectorHistory, CollectorHistoryDTO>();
+                cfg.CreateMap<FoodCollectRequestHistory, FoodCollectRequestHistoryDTO>();
+                cfg.CreateMap<Distributor, DToCDFCHistoryDTO>();
+            });
+
+            var mapper = config.CreateMapper();
+
+            var result = (from d in distributors
+                          select new DToCDFCHistoryDTO
+                          {
+                              DistributorHistories = (from dh in d.DistributorHistorys
+                                                      select mapper.Map<DistributorHistoryDTO>(dh)).ToList(),
+                              CollectorHistorys = (from ch in d.CollectorHistorys
+                                                   select mapper.Map<CollectorHistoryDTO>(ch)).ToList(),
+                              FoodCollectRequestHistorys = (from fcrh in d.FoodCollectRequestHistorys
+                                                            select mapper.Map<FoodCollectRequestHistoryDTO>(fcrh)).ToList()
+                          }).ToList();
+
+            return result;
+        }
+
+        public List<DToCDFCHistoryDTO> DToCDFCHistoryListDTO(List<Distributor> distributors, int id)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<DistributorHistory, DistributorHistoryDTO>();
+                cfg.CreateMap<CollectorHistory, CollectorHistoryDTO>();
+                cfg.CreateMap<FoodCollectRequestHistory, FoodCollectRequestHistoryDTO>();
+                cfg.CreateMap<Distributor, DToCDFCHistoryDTO>();
+            });
+
+            var mapper = config.CreateMapper();
+
+            var result = (from d in distributors
+                          where d.id == id
+                          select new DToCDFCHistoryDTO
+                          {
+                              name = d.name,
+                              DistributorHistories = (from dh in d.DistributorHistorys
+                                                      where d.id == dh.distributorID
+                                                      select mapper.Map<DistributorHistoryDTO>(dh)).ToList(),
+                              CollectorHistorys = (from ch in d.CollectorHistorys
+                                                   where d.id == ch.distributorID
+                                                   select mapper.Map<CollectorHistoryDTO>(ch)).ToList(),
+                              FoodCollectRequestHistorys = (from fcrh in d.FoodCollectRequestHistorys
+                                                            where d.id == fcrh.distributorID
+                                                            select mapper.Map<FoodCollectRequestHistoryDTO>(fcrh)).ToList()
+                          }).ToList();
+
+            return result;
+        }
+
+
 
 
     }

@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Collector Details";
+}
+<div class="container mt-4">
+    <h2>Collector Details</h2>
+    <hr />
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Name</th>
+            <td>@Model.name</td>
+        </tr>
+        <tr>
+            <th>Contact Number</th>
+            <td>@Model.contactNumber</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>@Model.email</td>
+        </tr>
+        <tr>
+            <th>Vehicle Type</th>
+            <td>@Model.vehicleType</td>
+        </tr>
+    </table>
+
+    <div class="text-center">
+        <a href="/Admin/detailsCD" class="btn btn-secondary">Back</a>
+    </div>
+</div>

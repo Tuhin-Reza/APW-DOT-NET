@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Request Food Details";
+}
+<div class="container mt-4">
+    <hr />
+    <h3>Request Details</h3>
+    <table class="table table-bordered">
+        <tr>
+            <th>Food Type</th>
+            <td>@Model.foodType</td>
+        </tr>
+        <tr>
+            <th>Packaging Type</th>
+            <td>@Model.packagingType</td>
+        </tr>
+        <tr>
+            <th>Number of Packages</th>
+            <td>@Model.numberofPackages</td>
+        </tr>
+        <tr>
+            <th>Food Description</th>
+            <td>@Model.foodDescription</td>
+        </tr>
+        <tr>
+            <th>Available Date</th>
+            <td>@Model.availableDate.ToString("yy/MM/dd")</td>
+        </tr>
+        <tr>
+            <th>Preferred Collect Time</th>
+            <td>@Model.preferredCollectTime.ToString("h:mm tt")</td>
+        </tr>
+        <tr>
+            <th>Expiry Date</th>
+            <td>@Model.expiryDate</td>
+        </tr>
+        <tr>
+            <th>Pickup Location</th>
+            <td>@Model.pickUpLocation</td>
+        </tr>
+        <tr>
+            <th>Status Type</th>
+            <td>@Model.statusType</td>
+        </tr>
+    </table>
+
+    <hr />
+
+    <h3>Restaurant Details</h3>
+    <table class="table table-bordered">
+        <tr>
+            <th>Restaurant Name</th>
+            <td>@ViewBag.restaurant.restaurantName</td>
+        </tr>
+        <tr>
+            <th>Location</th>
+            <td>@ViewBag.restaurant.location</td>
+        </tr>
+        <tr>
+            <th>Contact Person Name</th>
+            <td>@ViewBag.restaurant.contactPersonName</td>
+        </tr>
+        <tr>
+            <th>Contact Person Number</th>
+            <td>@ViewBag.restaurant.contactPersonNumber</td>
+        </tr>
+        <tr>
+            <th>Contact Person Designation</th>
+            <td>@ViewBag.restaurant.contactPersonDesignation</td>
+        </tr>
+        <tr>
+            <th>Restaurant Type</th>
+            <td>@ViewBag.restaurant.restaurantType</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>@ViewBag.restaurant.email</td>
+        </tr>
+    </table>
+
+    <div class="text-center">
+        <a href="/Admin/detailsCD" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+

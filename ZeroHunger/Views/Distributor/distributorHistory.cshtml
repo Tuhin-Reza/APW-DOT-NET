@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "distributorHistory";
+}
+<a href="/Distributor/Index" class="btn btn-secondary">Back</a>
+<br />
+<hr />
+<h2>Distributor All History</h2>
+<hr />
+@if (Model != null)
+{
+    foreach (var d in Model)
+    {
+        <h5>Distributor History</h5>
+        <div>
+            <table class="table table-bordered">
+                <thead class="table-danger">
+                    <tr>
+                        <th>Collect Date</th>
+                        <th>Collect Time</th>
+                        <th>Distribute Status</th>
+                        <th>Distribute reason</th>
+                        <th>Distribute Date</th>
+                        <th>Distribut Time</th>
+                        <th>Distribute Location</th>
+                        <th>Receiver Type</th>
+                        <th>Number of Receiver</th>
+                        <th>Request Id</th>
+                    </tr>
+                </thead>
+                @foreach (var dh in d.DistributorHistories)
+                {
+
+                <tbody>
+                    <tr>
+                        <td>@dh.collectDate.ToString("yy/MM/dd")</td>
+                        <td>@dh.collectTime.ToString("h:mm tt")</td>
+                        <td>@dh.distributeStatus</td>
+                        <td>@dh.distributereason</td>
+                        <td>@dh.distributeDate.ToString("yy/MM/dd")</td>
+                        <td>@dh.distributTime.ToString("h:mm tt")</td>
+                        <td>@dh.distributeLocation</td>
+                        <td>@dh.receiverType</td>
+                        <td>@dh.numberofReceiver</td>
+                        <td>@dh.requestID</td>
+                    </tr>
+                </tbody>
+
+                }
+            </table>
+        </div>
+        <hr style="height:10px; background-color: orangered; border: none;" />
+
+        <h5>Collector History</h5>
+        <div>
+            <table class="table table-bordered">
+                <thead class="table-warning">
+                    <tr>
+                        <th>Collect Date</th>
+                        <th>Collect Time</th>
+                        <th>pickUp Location</th>
+                        <th>Transportation Method</th>
+                        <th>Delivery Location </th>
+                        <th>Handover Date</th>
+                        <th>Handover Time</th>
+                        <th>Request Id</th>
+                    </tr>
+                </thead>
+                @foreach (var ch in d.CollectorHistorys)
+                {
+
+                    <tbody>
+                        <tr>
+                            <td>@ch.collectDate.ToString("yy/MM/dd")</td>
+                            <td>@ch.collectTime.ToString("h:mm tt")</td>
+                            <td>@ch.pickUpLocation</td>
+                            <td>@ch.TransportationMethod</td>
+                            <td>@ch.deliveryLocation </td>
+                            <td>@ch.handoverDate.ToString("yy/MM/dd")</td>
+                            <td>@ch.handoverTime.ToString("h:mm tt")</td>
+                            <td>@ch.requestID</td>
+                        </tr>
+                    </tbody>
+
+
+                }
+            </table>
+        </div>
+        <hr style="height:10px; background-color: orangered; border: none;" />
+
+        <h5>Food Collection History</h5>
+        <div>
+            <table class="table table-bordered">
+                <thead class="table-info">
+                    <tr>
+                        <th>Request Status</th>
+                        <th>Collect Reason</th>
+                        <th>Collect Date</th>
+                        <th>Collect Time</th>
+                        <th>Request Id</th>
+
+                    </tr>
+                </thead>
+                @foreach (var fcrh in d.FoodCollectRequestHistorys)
+                {
+
+                    <tbody>
+                        <tr>
+                            <td>@fcrh.requestStatus</td>
+                            <td>@fcrh.collectReason</td>
+                            <td>@fcrh.collectDate</td>
+                            <td>@fcrh.collectTime</td>
+                            <td>@fcrh.requestID</td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+    }
+
+}

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static ZeroHunger.CustomValidation.CollectRequestValidation;
 
 namespace ZeroHunger.DTOS
 {
@@ -13,18 +14,22 @@ namespace ZeroHunger.DTOS
         public string packagingType { get; set; }
 
         [Required]
+        [Range(10, int.MaxValue, ErrorMessage = "The number of packages must be at least 10.")]
         public int numberofPackages { get; set; }
 
         [Required]
         public string foodDescription { get; set; }
 
+
         [Required]
+
         public System.DateTime availableDate { get; set; }
 
         [Required]
         public System.DateTime preferredCollectTime { get; set; }
 
-        [Required]
+
+        [DateTimeValoidation]
         public System.DateTime expiryDate { get; set; }
 
         [Required]

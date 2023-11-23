@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using static ZeroHunger.CustomValidation.assignDistributorValidation;
 
 namespace ZeroHunger.DTOS
 {
@@ -6,22 +6,27 @@ namespace ZeroHunger.DTOS
     {
         public int id { get; set; }
 
-        [Required]
+
+        [nameValidation]
         public string name { get; set; }
 
-        [Required]
+        [contactNumberValidation]
         public string contactNumber { get; set; }
 
-        [Required]
+
+        [emailValidation]
         public string email { get; set; }
 
-        [Required]
+
+        [areaValidation]
         public string area { get; set; }
 
-        [Required]
+
+        [usernameValidation]
         public string username { get; set; }
 
-        [Required]
+
+        [passwordValidation]
         public string password { get; set; }
 
 

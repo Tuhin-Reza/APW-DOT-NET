@@ -17,7 +17,7 @@ namespace ZeroHunger.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Signin");
         }
 
         [HttpGet]

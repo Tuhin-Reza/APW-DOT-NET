@@ -13,11 +13,12 @@
     Distribute Area Pending @if (ViewBag.collectedcount != null)
     {<span class="badge">@ViewBag.collectedcount</span>}
 </a>
+<a href="/Admin/detailsCD" class="btn btn-warning">Details</a>
 
 <a href="/Admin/assignCollector" class="btn btn-warning">Assign Collector</a>
 <a href="/Admin/assignDistributor" class="btn btn-warning">Assign Distributor</a>
-
-
+<a href="/Home/Signout" class="btn btn-info">Signout</a><br /><br />
+<hr/>
 <h6>Food Collect Requests</h6>
 @if (Model != null && Model.Count > 0)
 {

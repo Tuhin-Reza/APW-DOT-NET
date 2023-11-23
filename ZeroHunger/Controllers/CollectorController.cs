@@ -146,9 +146,16 @@ namespace ZeroHunger.Controllers
                                           select d).SingleOrDefault();
                 if (collectorUser != null && foodCollectRequest != null)
                 {
+                    var fcrH = (from history in db.FoodCollectRequestHistorys
+                                where history.requestID == id
+                                select history).SingleOrDefault();
+                    fcrH.collectDate = DateTime.Today;
+                    fcrH.collectTime = DateTime.Now;
+                    db.SaveChanges();
+
                     var createHistory = new CollectorHistory()
                     {
-                        collectDate = DateTime.Now.Date,
+                        collectDate = DateTime.Today,
                         collectTime = DateTime.Now,
                         pickUpLocation = foodCollectRequest.pickUpLocation,
                         TransportationMethod = collectorUser.vehicleType,
@@ -174,6 +181,18 @@ namespace ZeroHunger.Controllers
             }
             return RedirectToAction("Index");
         }
+
+
+        //public ActionResult collectorHistory()
+        //{
+        //    var distID = (from d in db.CollectorHistorys
+        //                  where d.userID == sessionUser.id
+        //                  select d.id).SingleOrDefault();
+        //    var distributor = db.Distributors.ToList();
+        //    var distHistory = mapper.DToCDFCHistoryListDTO(distributor, distID);
+
+        //    return View(distHistory);
+        //}
 
 
         private UserDTO sessionUser

@@ -71,6 +71,13 @@ namespace ZeroHunger.Controllers
                                           select d).SingleOrDefault();
                 foodCollectRequest.statusType = "In Transit";
                 db.SaveChanges();
+
+                var fcrH = (from history in db.FoodCollectRequestHistorys
+                            where history.requestID == id
+                            select history).SingleOrDefault();
+                fcrH.distributorID = distID;
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -278,6 +285,18 @@ namespace ZeroHunger.Controllers
                 }
             }
             return View(data);
+        }
+
+        [Logged]
+        public ActionResult distributorHistory()
+        {
+            var distID = (from d in db.Distributors
+                          where d.userID == sessionUser.id
+                          select d.id).SingleOrDefault();
+            var distributor = db.Distributors.ToList();
+            var distHistory = mapper.DToCDFCHistoryListDTO(distributor, distID);
+
+            return View(distHistory);
         }
 
 
