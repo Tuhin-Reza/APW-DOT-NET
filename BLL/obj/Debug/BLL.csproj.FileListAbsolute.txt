@@ -1,0 +1,9 @@
+F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\2.Final_Term\2.Lab\4.Lab_Task\FinalLabTask1\PL\BLL\bin\Debug\BLL.dll
+F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\2.Final_Term\2.Lab\4.Lab_Task\FinalLabTask1\PL\BLL\bin\Debug\BLL.pdb
+F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\2.Final_Term\2.Lab\4.Lab_Task\FinalLabTask1\PL\BLL\bin\Debug\DAL.dll
+F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\2.Final_Term\2.Lab\4.Lab_Task\FinalLabTask1\PL\BLL\bin\Debug\DAL.pdb
+F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\2.Final_Term\2.Lab\4.Lab_Task\FinalLabTask1\PL\BLL\obj\Debug\BLL.csproj.AssemblyReference.cache
+F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\2.Final_Term\2.Lab\4.Lab_Task\FinalLabTask1\PL\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\2.Final_Term\2.Lab\4.Lab_Task\FinalLabTask1\PL\BLL\obj\Debug\BLL.csproj.CopyComplete
+F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\2.Final_Term\2.Lab\4.Lab_Task\FinalLabTask1\PL\BLL\obj\Debug\BLL.dll
+F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\2.Final_Term\2.Lab\4.Lab_Task\FinalLabTask1\PL\BLL\obj\Debug\BLL.pdb
