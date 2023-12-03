@@ -67,3 +67,5 @@ F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\2.Final_Term\2.Lab\4.Lab_Task\FinalLa
 F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\2.Final_Term\2.Lab\4.Lab_Task\FinalLabTask1\PL\PL\obj\Debug\PL.pdb
 F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\2.Final_Term\2.Lab\4.Lab_Task\FinalLabTask1\PL\PL\bin\BLL.dll
 F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\2.Final_Term\2.Lab\4.Lab_Task\FinalLabTask1\PL\PL\bin\BLL.pdb
+F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\2.Final_Term\2.Lab\4.Lab_Task\FinalLabTask1\PL\PL\bin\DAL.dll
+F:\1.Semester\7.2023-2024_Fall\2.APWDN_[B]\2.Final_Term\2.Lab\4.Lab_Task\FinalLabTask1\PL\PL\bin\DAL.pdb
